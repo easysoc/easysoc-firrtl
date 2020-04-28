@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.18'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+}
+
+group 'org.easysoc'
+version pluginVersion
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.antlr:antlr4-runtime:4.8-1'
+    implementation 'org.antlr:antlr4-intellij-adaptor:0.1'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    // version and localPath should not be specified at the same time
+    localPath "/home/itviewer/Downloads/software/chip"
+
+    // https://blog.jetbrains.com/platform/2019/06/java-functionality-extracted-as-a-plugin/
+    plugins 'PsiViewer:201.6251.22-EAP-SNAPSHOT.3'
+    downloadSources false
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+runIde {
+    // https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime
+    jbrVersion "11_0_6b840.3"
+    ideDirectory "/home/itviewer/Downloads/software/chip"
+    jvmArgs '-Didea.platform.prefix=Chip'
+    //for jbr11
+    jvmArgs '--add-exports=java.base/jdk.internal.vm=ALL-UNNAMED','-Djdk.module.illegalAccess.silent=true'
+}
+
+patchPluginXml {
+    sinceBuild "193"
+    untilBuild "203.*"
+    changeNotes """
+      First release.<br>"""
+}
+
+buildSearchableOptions.onlyIf { false }
+jarSearchableOptions.onlyIf { false }
+
+//prepareSandbox.onlyIf { false }

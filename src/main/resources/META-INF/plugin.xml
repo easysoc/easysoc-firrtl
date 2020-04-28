@@ -1,0 +1,35 @@
+<idea-plugin allow-bundled-update="true" url="https://www.easysoc.org">
+    <id>org.easysoc.firrtl</id>
+    <name>EasySoC Firrtl</name>
+    <vendor url="https://www.easysoc.org">EasySoC</vendor>
+
+    <description><![CDATA[
+    Jump to the corresponding Chisel code by navigate(Ctrl+Click) the Firrtl fileinfo comment.<br>
+    Also supports Syntax highlighting, Structure View and more features in the future.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <fileType name="Firrtl" implementationClass="org.easysoc.plugins.firrtl.FirrtlFileType" fieldName="INSTANCE"
+                  language="Firrtl" extensions="fir"/>
+        <lang.syntaxHighlighterFactory language="Firrtl"
+                                       implementationClass="org.easysoc.plugins.firrtl.highlight.FirrtlSyntaxHighlighterFactory"/>
+        <!-- used for build leaf node and resolving references-->
+        <lang.ast.factory language="Firrtl" implementationClass="org.easysoc.plugins.firrtl.FirrtlASTFactory"/>
+        <!-- used for build PSI(only subtree) https://www.jetbrains.org/intellij/sdk/docs/basics/architectural_overview/psi.html -->
+        <lang.parserDefinition language="Firrtl" implementationClass="org.easysoc.plugins.firrtl.FirrtlParserDefinition"/>
+
+        <documentationProvider implementation="org.easysoc.plugins.firrtl.paths.FileInfoReferenceDocumentationProvider" order="last"/>
+		<lang.psiStructureViewFactory language="Firrtl"
+									  implementationClass="org.easysoc.plugins.firrtl.psi.FirrtlStructureViewFactory"/>
+
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
