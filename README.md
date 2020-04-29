@@ -4,7 +4,7 @@
 
 - Syntax highlighting
 - Structure View
-- Navigate to corresponding Chisel code by Ctrl+Click the Firrtl fileinfo comment
+- Navigate to corresponding Chisel code by Ctrl+Click or Ctrl+B on the Firrtl fileinfo comment
 
 ### Build
 
