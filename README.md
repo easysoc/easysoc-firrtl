@@ -18,3 +18,5 @@
 
 3. run gradle tasks buildPlugin or runIde directly
 
+
+![](https://plugins.jetbrains.com/files/14183/screenshot_21600.png)
