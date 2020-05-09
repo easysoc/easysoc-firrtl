@@ -95,7 +95,7 @@ public class FirrtlSyntaxHighlighter extends SyntaxHighlighterBase {
 			case FirrtlLanguageLexer.Key_wire :
 			case FirrtlLanguageLexer.Key_reg :
 			case FirrtlLanguageLexer.Key_with :
-			case FirrtlLanguageLexer.Key_reset :
+//			case FirrtlLanguageLexer.Key_reset :
 			case FirrtlLanguageLexer.Key_mem :
 			case FirrtlLanguageLexer.Key_depth :
 			case FirrtlLanguageLexer.Key_reader :

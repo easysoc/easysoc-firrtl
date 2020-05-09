@@ -26,17 +26,18 @@ public class FirrtlLanguageParser extends Parser {
 		T__45=46, T__46=47, T__47=48, T__48=49, T__49=50, T__50=51, T__51=52, 
 		T__52=53, T__53=54, T__54=55, T__55=56, T__56=57, T__57=58, T__58=59, 
 		T__59=60, T__60=61, T__61=62, T__62=63, T__63=64, T__64=65, T__65=66, 
-		T__66=67, T__67=68, T__68=69, Key_circuit=70, Key_module=71, Key_extmodule=72, 
-		Key_parameter=73, Key_input=74, Key_output=75, Key_UInt=76, Key_SInt=77, 
-		Key_Clock=78, Key_Analog=79, Key_Fixed=80, Key_flip=81, Key_wire=82, Key_reg=83, 
-		Key_with=84, Key_reset=85, Key_mem=86, Key_depth=87, Key_reader=88, Key_writer=89, 
+		T__66=67, T__67=68, T__68=69, T__69=70, Key_circuit=71, Key_module=72, 
+		Key_extmodule=73, Key_parameter=74, Key_input=75, Key_output=76, Key_UInt=77, 
+		Key_SInt=78, Key_Clock=79, Key_Analog=80, Key_Fixed=81, Key_flip=82, Key_wire=83, 
+		Key_reg=84, Key_with=85, Key_mem=86, Key_depth=87, Key_reader=88, Key_writer=89, 
 		Key_readwriter=90, Key_inst=91, Key_of=92, Key_node=93, Key_is=94, Key_invalid=95, 
 		Key_when=96, Key_else=97, Key_stop=98, Key_printf=99, Key_skip=100, Key_old=101, 
 		Key_new=102, Key_undefined=103, Key_mux=104, Key_validif=105, Key_cmem=106, 
 		Key_smem=107, Key_mport=108, Key_infer=109, Key_read=110, Key_write=111, 
-		Key_rdwr=112, UnsignedInt=113, SignedInt=114, HexLit=115, DoubleLit=116, 
-		StringLit=117, RawString=118, FileInfo=119, Id=120, RelaxedId=121, COMMENT=122, 
-		WHITESPACE=123, NEWLINE=124, ERRCHAR=125, INDENT=126, DEDENT=127;
+		Key_rdwr=112, UnsignedInt=113, SignedInt=114, HexLit=115, OctalLit=116, 
+		BinaryLit=117, DoubleLit=118, StringLit=119, RawString=120, FileInfo=121, 
+		Id=122, RelaxedId=123, COMMENT=124, WHITESPACE=125, NEWLINE=126, ERRCHAR=127, 
+		INDENT=128, DEDENT=129;
 	public static final int
 		RULE_circuit = 0, RULE_module = 1, RULE_port = 2, RULE_dir = 3, RULE_type = 4, 
 		RULE_field = 5, RULE_defname = 6, RULE_parameter = 7, RULE_moduleBlock = 8, 
@@ -59,18 +60,18 @@ public class FirrtlLanguageParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "':'", "'<'", "'>'", "'Interval'", "'.'", "'AsyncReset'", "'Reset'", 
-			"'{'", "'}'", "'['", "']'", "'defname'", "'='", "'=>'", "'('", "')'", 
-			"'<='", "'<-'", "'stop('", "'printf('", "'attach'", "'data-type'", "'read-latency'", 
-			"'write-latency'", "'read-under-write'", "'mux('", "'validif('", "'?'", 
-			"'add('", "'sub('", "'mul('", "'div('", "'rem('", "'lt('", "'leq('", 
-			"'gt('", "'geq('", "'eq('", "'neq('", "'pad('", "'asUInt('", "'asAsyncReset('", 
-			"'asSInt('", "'asClock('", "'asFixedPoint('", "'asInterval('", "'shl('", 
-			"'shr('", "'dshl('", "'dshr('", "'cvt('", "'neg('", "'not('", "'and('", 
-			"'or('", "'xor('", "'andr('", "'orr('", "'xorr('", "'cat('", "'bits('", 
-			"'head('", "'tail('", "'incp('", "'decp('", "'setp('", "'wrap('", "'clip('", 
-			"'squz('", "'circuit'", "'module'", "'extmodule'", "'parameter'", "'input'", 
-			"'output'", "'UInt'", "'SInt'", "'Clock'", "'Analog'", "'Fixed'", "'flip'", 
-			"'wire'", "'reg'", "'with'", "'reset'", "'mem'", "'depth'", "'reader'", 
+			"'{'", "'}'", "'['", "']'", "'defname'", "'='", "'reset'", "'=>'", "'('", 
+			"')'", "'<='", "'<-'", "'stop('", "'printf('", "'attach'", "'data-type'", 
+			"'read-latency'", "'write-latency'", "'read-under-write'", "'mux('", 
+			"'validif('", "'?'", "'add('", "'sub('", "'mul('", "'div('", "'rem('", 
+			"'lt('", "'leq('", "'gt('", "'geq('", "'eq('", "'neq('", "'pad('", "'asUInt('", 
+			"'asAsyncReset('", "'asSInt('", "'asClock('", "'asFixedPoint('", "'asInterval('", 
+			"'shl('", "'shr('", "'dshl('", "'dshr('", "'cvt('", "'neg('", "'not('", 
+			"'and('", "'or('", "'xor('", "'andr('", "'orr('", "'xorr('", "'cat('", 
+			"'bits('", "'head('", "'tail('", "'incp('", "'decp('", "'setp('", "'wrap('", 
+			"'clip('", "'squz('", "'circuit'", "'module'", "'extmodule'", "'parameter'", 
+			"'input'", "'output'", "'UInt'", "'SInt'", "'Clock'", "'Analog'", "'Fixed'", 
+			"'flip'", "'wire'", "'reg'", "'with'", "'mem'", "'depth'", "'reader'", 
 			"'writer'", "'readwriter'", "'inst'", "'of'", "'node'", "'is'", "'invalid'", 
 			"'when'", "'else'", "'stop'", "'printf'", "'skip'", "'old'", "'new'", 
 			"'undefined'", "'mux'", "'validif'", "'cmem'", "'smem'", "'mport'", "'infer'", 
@@ -85,16 +86,16 @@ public class FirrtlLanguageParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, "Key_circuit", 
+			null, null, null, null, null, null, null, null, null, null, null, "Key_circuit", 
 			"Key_module", "Key_extmodule", "Key_parameter", "Key_input", "Key_output", 
 			"Key_UInt", "Key_SInt", "Key_Clock", "Key_Analog", "Key_Fixed", "Key_flip", 
-			"Key_wire", "Key_reg", "Key_with", "Key_reset", "Key_mem", "Key_depth", 
-			"Key_reader", "Key_writer", "Key_readwriter", "Key_inst", "Key_of", "Key_node", 
-			"Key_is", "Key_invalid", "Key_when", "Key_else", "Key_stop", "Key_printf", 
-			"Key_skip", "Key_old", "Key_new", "Key_undefined", "Key_mux", "Key_validif", 
-			"Key_cmem", "Key_smem", "Key_mport", "Key_infer", "Key_read", "Key_write", 
-			"Key_rdwr", "UnsignedInt", "SignedInt", "HexLit", "DoubleLit", "StringLit", 
-			"RawString", "FileInfo", "Id", "RelaxedId", "COMMENT", "WHITESPACE", 
+			"Key_wire", "Key_reg", "Key_with", "Key_mem", "Key_depth", "Key_reader", 
+			"Key_writer", "Key_readwriter", "Key_inst", "Key_of", "Key_node", "Key_is", 
+			"Key_invalid", "Key_when", "Key_else", "Key_stop", "Key_printf", "Key_skip", 
+			"Key_old", "Key_new", "Key_undefined", "Key_mux", "Key_validif", "Key_cmem", 
+			"Key_smem", "Key_mport", "Key_infer", "Key_read", "Key_write", "Key_rdwr", 
+			"UnsignedInt", "SignedInt", "HexLit", "OctalLit", "BinaryLit", "DoubleLit", 
+			"StringLit", "RawString", "FileInfo", "Id", "RelaxedId", "COMMENT", "WHITESPACE", 
 			"NEWLINE", "ERRCHAR", "INDENT", "DEDENT"
 		};
 	}
@@ -707,7 +708,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(183);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Key_circuit - 70)) | (1L << (Key_module - 70)) | (1L << (Key_extmodule - 70)) | (1L << (Key_parameter - 70)) | (1L << (Key_input - 70)) | (1L << (Key_output - 70)) | (1L << (Key_UInt - 70)) | (1L << (Key_SInt - 70)) | (1L << (Key_Clock - 70)) | (1L << (Key_Analog - 70)) | (1L << (Key_Fixed - 70)) | (1L << (Key_flip - 70)) | (1L << (Key_wire - 70)) | (1L << (Key_reg - 70)) | (1L << (Key_with - 70)) | (1L << (Key_reset - 70)) | (1L << (Key_mem - 70)) | (1L << (Key_depth - 70)) | (1L << (Key_reader - 70)) | (1L << (Key_writer - 70)) | (1L << (Key_readwriter - 70)) | (1L << (Key_inst - 70)) | (1L << (Key_of - 70)) | (1L << (Key_node - 70)) | (1L << (Key_is - 70)) | (1L << (Key_invalid - 70)) | (1L << (Key_when - 70)) | (1L << (Key_else - 70)) | (1L << (Key_stop - 70)) | (1L << (Key_printf - 70)) | (1L << (Key_skip - 70)) | (1L << (Key_old - 70)) | (1L << (Key_new - 70)) | (1L << (Key_undefined - 70)) | (1L << (Key_mux - 70)) | (1L << (Key_validif - 70)) | (1L << (Key_cmem - 70)) | (1L << (Key_smem - 70)) | (1L << (Key_mport - 70)) | (1L << (Key_infer - 70)) | (1L << (Key_read - 70)) | (1L << (Key_write - 70)) | (1L << (Key_rdwr - 70)) | (1L << (UnsignedInt - 70)) | (1L << (Id - 70)) | (1L << (RelaxedId - 70)))) != 0)) {
+				while (_la==T__13 || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (Key_circuit - 71)) | (1L << (Key_module - 71)) | (1L << (Key_extmodule - 71)) | (1L << (Key_parameter - 71)) | (1L << (Key_input - 71)) | (1L << (Key_output - 71)) | (1L << (Key_UInt - 71)) | (1L << (Key_SInt - 71)) | (1L << (Key_Clock - 71)) | (1L << (Key_Analog - 71)) | (1L << (Key_Fixed - 71)) | (1L << (Key_flip - 71)) | (1L << (Key_wire - 71)) | (1L << (Key_reg - 71)) | (1L << (Key_with - 71)) | (1L << (Key_mem - 71)) | (1L << (Key_depth - 71)) | (1L << (Key_reader - 71)) | (1L << (Key_writer - 71)) | (1L << (Key_readwriter - 71)) | (1L << (Key_inst - 71)) | (1L << (Key_of - 71)) | (1L << (Key_node - 71)) | (1L << (Key_is - 71)) | (1L << (Key_invalid - 71)) | (1L << (Key_when - 71)) | (1L << (Key_else - 71)) | (1L << (Key_stop - 71)) | (1L << (Key_printf - 71)) | (1L << (Key_skip - 71)) | (1L << (Key_old - 71)) | (1L << (Key_new - 71)) | (1L << (Key_undefined - 71)) | (1L << (Key_mux - 71)) | (1L << (Key_validif - 71)) | (1L << (Key_cmem - 71)) | (1L << (Key_smem - 71)) | (1L << (Key_mport - 71)) | (1L << (Key_infer - 71)) | (1L << (Key_read - 71)) | (1L << (Key_write - 71)) | (1L << (Key_rdwr - 71)) | (1L << (UnsignedInt - 71)) | (1L << (Id - 71)) | (1L << (RelaxedId - 71)))) != 0)) {
 					{
 					{
 					setState(180);
@@ -973,7 +974,7 @@ public class FirrtlLanguageParser extends Parser {
 			setState(240);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_reset - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)) | (1L << (NEWLINE - 64)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__26) | (1L << T__27) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (T__69 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)) | (1L << (NEWLINE - 64)))) != 0)) {
 				{
 				{
 				setState(237);
@@ -998,7 +999,6 @@ public class FirrtlLanguageParser extends Parser {
 	}
 
 	public static class Simple_reset0Context extends ParserRuleContext {
-		public TerminalNode Key_reset() { return getToken(FirrtlLanguageParser.Key_reset, 0); }
 		public List<ExpContext> exp() {
 			return getRuleContexts(ExpContext.class);
 		}
@@ -1018,17 +1018,17 @@ public class FirrtlLanguageParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(243);
-			match(Key_reset);
-			setState(244);
 			match(T__13);
-			setState(245);
+			setState(244);
 			match(T__14);
+			setState(245);
+			match(T__15);
 			setState(246);
 			exp(0);
 			setState(247);
 			exp(0);
 			setState(248);
-			match(T__15);
+			match(T__16);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1059,22 +1059,22 @@ public class FirrtlLanguageParser extends Parser {
 			setState(255);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case Key_reset:
+			case T__13:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(250);
 				simple_reset0();
 				}
 				break;
-			case T__14:
+			case T__15:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(251);
-				match(T__14);
+				match(T__15);
 				setState(252);
 				simple_reset0();
 				setState(253);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			default:
@@ -1136,15 +1136,15 @@ public class FirrtlLanguageParser extends Parser {
 				match(DEDENT);
 				}
 				break;
-			case T__14:
+			case T__15:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(264);
-				match(T__14);
+				match(T__15);
 				setState(265);
 				simple_reset();
 				setState(266);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			default:
@@ -1318,7 +1318,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(300);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24))) != 0) || ((((_la - 87)) & ~0x3f) == 0 && ((1L << (_la - 87)) & ((1L << (Key_depth - 87)) | (1L << (Key_reader - 87)) | (1L << (Key_writer - 87)) | (1L << (Key_readwriter - 87)))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__25))) != 0) || ((((_la - 87)) & ~0x3f) == 0 && ((1L << (_la - 87)) & ((1L << (Key_depth - 87)) | (1L << (Key_reader - 87)) | (1L << (Key_writer - 87)) | (1L << (Key_readwriter - 87)))) != 0)) {
 					{
 					{
 					setState(297);
@@ -1474,7 +1474,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(348);
 				exp(0);
 				setState(349);
-				match(T__16);
+				match(T__17);
 				setState(350);
 				exp(0);
 				setState(352);
@@ -1495,7 +1495,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(354);
 				exp(0);
 				setState(355);
-				match(T__17);
+				match(T__18);
 				setState(356);
 				exp(0);
 				setState(358);
@@ -1542,7 +1542,7 @@ public class FirrtlLanguageParser extends Parser {
 				enterOuterAlt(_localctx, 13);
 				{
 				setState(367);
-				match(T__18);
+				match(T__19);
 				setState(368);
 				exp(0);
 				setState(369);
@@ -1550,7 +1550,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(370);
 				intLit();
 				setState(371);
-				match(T__15);
+				match(T__16);
 				setState(373);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1567,7 +1567,7 @@ public class FirrtlLanguageParser extends Parser {
 				enterOuterAlt(_localctx, 14);
 				{
 				setState(375);
-				match(T__19);
+				match(T__20);
 				setState(376);
 				exp(0);
 				setState(377);
@@ -1577,7 +1577,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(382);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_reset - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << T__26) | (1L << T__27) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (T__69 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0)) {
 					{
 					{
 					setState(379);
@@ -1589,7 +1589,7 @@ public class FirrtlLanguageParser extends Parser {
 					_la = _input.LA(1);
 				}
 				setState(385);
-				match(T__15);
+				match(T__16);
 				setState(387);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1623,9 +1623,9 @@ public class FirrtlLanguageParser extends Parser {
 				enterOuterAlt(_localctx, 16);
 				{
 				setState(393);
-				match(T__20);
+				match(T__21);
 				setState(394);
-				match(T__14);
+				match(T__15);
 				setState(396); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1639,9 +1639,9 @@ public class FirrtlLanguageParser extends Parser {
 					setState(398); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_reset - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0) );
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << T__26) | (1L << T__27) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (T__69 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0) );
 				setState(400);
-				match(T__15);
+				match(T__16);
 				setState(402);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1702,13 +1702,13 @@ public class FirrtlLanguageParser extends Parser {
 			setState(458);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__21:
+			case T__22:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(406);
-				match(T__21);
+				match(T__22);
 				setState(407);
-				match(T__13);
+				match(T__14);
 				setState(408);
 				type(0);
 				setState(409);
@@ -1721,46 +1721,46 @@ public class FirrtlLanguageParser extends Parser {
 				setState(411);
 				match(Key_depth);
 				setState(412);
-				match(T__13);
+				match(T__14);
 				setState(413);
 				intLit();
 				setState(414);
 				match(NEWLINE);
 				}
 				break;
-			case T__22:
+			case T__23:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(416);
-				match(T__22);
+				match(T__23);
 				setState(417);
-				match(T__13);
+				match(T__14);
 				setState(418);
 				intLit();
 				setState(419);
 				match(NEWLINE);
 				}
 				break;
-			case T__23:
+			case T__24:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(421);
-				match(T__23);
+				match(T__24);
 				setState(422);
-				match(T__13);
+				match(T__14);
 				setState(423);
 				intLit();
 				setState(424);
 				match(NEWLINE);
 				}
 				break;
-			case T__24:
+			case T__25:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(426);
-				match(T__24);
+				match(T__25);
 				setState(427);
-				match(T__13);
+				match(T__14);
 				setState(428);
 				ruw();
 				setState(429);
@@ -1773,7 +1773,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(431);
 				match(Key_reader);
 				setState(432);
-				match(T__13);
+				match(T__14);
 				setState(434); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1787,7 +1787,7 @@ public class FirrtlLanguageParser extends Parser {
 					setState(436); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Key_circuit - 70)) | (1L << (Key_module - 70)) | (1L << (Key_extmodule - 70)) | (1L << (Key_parameter - 70)) | (1L << (Key_input - 70)) | (1L << (Key_output - 70)) | (1L << (Key_UInt - 70)) | (1L << (Key_SInt - 70)) | (1L << (Key_Clock - 70)) | (1L << (Key_Analog - 70)) | (1L << (Key_Fixed - 70)) | (1L << (Key_flip - 70)) | (1L << (Key_wire - 70)) | (1L << (Key_reg - 70)) | (1L << (Key_with - 70)) | (1L << (Key_reset - 70)) | (1L << (Key_mem - 70)) | (1L << (Key_depth - 70)) | (1L << (Key_reader - 70)) | (1L << (Key_writer - 70)) | (1L << (Key_readwriter - 70)) | (1L << (Key_inst - 70)) | (1L << (Key_of - 70)) | (1L << (Key_node - 70)) | (1L << (Key_is - 70)) | (1L << (Key_invalid - 70)) | (1L << (Key_when - 70)) | (1L << (Key_else - 70)) | (1L << (Key_stop - 70)) | (1L << (Key_printf - 70)) | (1L << (Key_skip - 70)) | (1L << (Key_old - 70)) | (1L << (Key_new - 70)) | (1L << (Key_undefined - 70)) | (1L << (Key_mux - 70)) | (1L << (Key_validif - 70)) | (1L << (Key_cmem - 70)) | (1L << (Key_smem - 70)) | (1L << (Key_mport - 70)) | (1L << (Key_infer - 70)) | (1L << (Key_read - 70)) | (1L << (Key_write - 70)) | (1L << (Key_rdwr - 70)) | (1L << (Id - 70)))) != 0) );
+				} while ( _la==T__13 || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (Key_circuit - 71)) | (1L << (Key_module - 71)) | (1L << (Key_extmodule - 71)) | (1L << (Key_parameter - 71)) | (1L << (Key_input - 71)) | (1L << (Key_output - 71)) | (1L << (Key_UInt - 71)) | (1L << (Key_SInt - 71)) | (1L << (Key_Clock - 71)) | (1L << (Key_Analog - 71)) | (1L << (Key_Fixed - 71)) | (1L << (Key_flip - 71)) | (1L << (Key_wire - 71)) | (1L << (Key_reg - 71)) | (1L << (Key_with - 71)) | (1L << (Key_mem - 71)) | (1L << (Key_depth - 71)) | (1L << (Key_reader - 71)) | (1L << (Key_writer - 71)) | (1L << (Key_readwriter - 71)) | (1L << (Key_inst - 71)) | (1L << (Key_of - 71)) | (1L << (Key_node - 71)) | (1L << (Key_is - 71)) | (1L << (Key_invalid - 71)) | (1L << (Key_when - 71)) | (1L << (Key_else - 71)) | (1L << (Key_stop - 71)) | (1L << (Key_printf - 71)) | (1L << (Key_skip - 71)) | (1L << (Key_old - 71)) | (1L << (Key_new - 71)) | (1L << (Key_undefined - 71)) | (1L << (Key_mux - 71)) | (1L << (Key_validif - 71)) | (1L << (Key_cmem - 71)) | (1L << (Key_smem - 71)) | (1L << (Key_mport - 71)) | (1L << (Key_infer - 71)) | (1L << (Key_read - 71)) | (1L << (Key_write - 71)) | (1L << (Key_rdwr - 71)) | (1L << (Id - 71)))) != 0) );
 				setState(438);
 				match(NEWLINE);
 				}
@@ -1798,7 +1798,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(440);
 				match(Key_writer);
 				setState(441);
-				match(T__13);
+				match(T__14);
 				setState(443); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1812,7 +1812,7 @@ public class FirrtlLanguageParser extends Parser {
 					setState(445); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Key_circuit - 70)) | (1L << (Key_module - 70)) | (1L << (Key_extmodule - 70)) | (1L << (Key_parameter - 70)) | (1L << (Key_input - 70)) | (1L << (Key_output - 70)) | (1L << (Key_UInt - 70)) | (1L << (Key_SInt - 70)) | (1L << (Key_Clock - 70)) | (1L << (Key_Analog - 70)) | (1L << (Key_Fixed - 70)) | (1L << (Key_flip - 70)) | (1L << (Key_wire - 70)) | (1L << (Key_reg - 70)) | (1L << (Key_with - 70)) | (1L << (Key_reset - 70)) | (1L << (Key_mem - 70)) | (1L << (Key_depth - 70)) | (1L << (Key_reader - 70)) | (1L << (Key_writer - 70)) | (1L << (Key_readwriter - 70)) | (1L << (Key_inst - 70)) | (1L << (Key_of - 70)) | (1L << (Key_node - 70)) | (1L << (Key_is - 70)) | (1L << (Key_invalid - 70)) | (1L << (Key_when - 70)) | (1L << (Key_else - 70)) | (1L << (Key_stop - 70)) | (1L << (Key_printf - 70)) | (1L << (Key_skip - 70)) | (1L << (Key_old - 70)) | (1L << (Key_new - 70)) | (1L << (Key_undefined - 70)) | (1L << (Key_mux - 70)) | (1L << (Key_validif - 70)) | (1L << (Key_cmem - 70)) | (1L << (Key_smem - 70)) | (1L << (Key_mport - 70)) | (1L << (Key_infer - 70)) | (1L << (Key_read - 70)) | (1L << (Key_write - 70)) | (1L << (Key_rdwr - 70)) | (1L << (Id - 70)))) != 0) );
+				} while ( _la==T__13 || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (Key_circuit - 71)) | (1L << (Key_module - 71)) | (1L << (Key_extmodule - 71)) | (1L << (Key_parameter - 71)) | (1L << (Key_input - 71)) | (1L << (Key_output - 71)) | (1L << (Key_UInt - 71)) | (1L << (Key_SInt - 71)) | (1L << (Key_Clock - 71)) | (1L << (Key_Analog - 71)) | (1L << (Key_Fixed - 71)) | (1L << (Key_flip - 71)) | (1L << (Key_wire - 71)) | (1L << (Key_reg - 71)) | (1L << (Key_with - 71)) | (1L << (Key_mem - 71)) | (1L << (Key_depth - 71)) | (1L << (Key_reader - 71)) | (1L << (Key_writer - 71)) | (1L << (Key_readwriter - 71)) | (1L << (Key_inst - 71)) | (1L << (Key_of - 71)) | (1L << (Key_node - 71)) | (1L << (Key_is - 71)) | (1L << (Key_invalid - 71)) | (1L << (Key_when - 71)) | (1L << (Key_else - 71)) | (1L << (Key_stop - 71)) | (1L << (Key_printf - 71)) | (1L << (Key_skip - 71)) | (1L << (Key_old - 71)) | (1L << (Key_new - 71)) | (1L << (Key_undefined - 71)) | (1L << (Key_mux - 71)) | (1L << (Key_validif - 71)) | (1L << (Key_cmem - 71)) | (1L << (Key_smem - 71)) | (1L << (Key_mport - 71)) | (1L << (Key_infer - 71)) | (1L << (Key_read - 71)) | (1L << (Key_write - 71)) | (1L << (Key_rdwr - 71)) | (1L << (Id - 71)))) != 0) );
 				setState(447);
 				match(NEWLINE);
 				}
@@ -1823,7 +1823,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(449);
 				match(Key_readwriter);
 				setState(450);
-				match(T__13);
+				match(T__14);
 				setState(452); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1837,7 +1837,7 @@ public class FirrtlLanguageParser extends Parser {
 					setState(454); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( ((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Key_circuit - 70)) | (1L << (Key_module - 70)) | (1L << (Key_extmodule - 70)) | (1L << (Key_parameter - 70)) | (1L << (Key_input - 70)) | (1L << (Key_output - 70)) | (1L << (Key_UInt - 70)) | (1L << (Key_SInt - 70)) | (1L << (Key_Clock - 70)) | (1L << (Key_Analog - 70)) | (1L << (Key_Fixed - 70)) | (1L << (Key_flip - 70)) | (1L << (Key_wire - 70)) | (1L << (Key_reg - 70)) | (1L << (Key_with - 70)) | (1L << (Key_reset - 70)) | (1L << (Key_mem - 70)) | (1L << (Key_depth - 70)) | (1L << (Key_reader - 70)) | (1L << (Key_writer - 70)) | (1L << (Key_readwriter - 70)) | (1L << (Key_inst - 70)) | (1L << (Key_of - 70)) | (1L << (Key_node - 70)) | (1L << (Key_is - 70)) | (1L << (Key_invalid - 70)) | (1L << (Key_when - 70)) | (1L << (Key_else - 70)) | (1L << (Key_stop - 70)) | (1L << (Key_printf - 70)) | (1L << (Key_skip - 70)) | (1L << (Key_old - 70)) | (1L << (Key_new - 70)) | (1L << (Key_undefined - 70)) | (1L << (Key_mux - 70)) | (1L << (Key_validif - 70)) | (1L << (Key_cmem - 70)) | (1L << (Key_smem - 70)) | (1L << (Key_mport - 70)) | (1L << (Key_infer - 70)) | (1L << (Key_read - 70)) | (1L << (Key_write - 70)) | (1L << (Key_rdwr - 70)) | (1L << (Id - 70)))) != 0) );
+				} while ( _la==T__13 || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (Key_circuit - 71)) | (1L << (Key_module - 71)) | (1L << (Key_extmodule - 71)) | (1L << (Key_parameter - 71)) | (1L << (Key_input - 71)) | (1L << (Key_output - 71)) | (1L << (Key_UInt - 71)) | (1L << (Key_SInt - 71)) | (1L << (Key_Clock - 71)) | (1L << (Key_Analog - 71)) | (1L << (Key_Fixed - 71)) | (1L << (Key_flip - 71)) | (1L << (Key_wire - 71)) | (1L << (Key_reg - 71)) | (1L << (Key_with - 71)) | (1L << (Key_mem - 71)) | (1L << (Key_depth - 71)) | (1L << (Key_reader - 71)) | (1L << (Key_writer - 71)) | (1L << (Key_readwriter - 71)) | (1L << (Key_inst - 71)) | (1L << (Key_of - 71)) | (1L << (Key_node - 71)) | (1L << (Key_is - 71)) | (1L << (Key_invalid - 71)) | (1L << (Key_when - 71)) | (1L << (Key_else - 71)) | (1L << (Key_stop - 71)) | (1L << (Key_printf - 71)) | (1L << (Key_skip - 71)) | (1L << (Key_old - 71)) | (1L << (Key_new - 71)) | (1L << (Key_undefined - 71)) | (1L << (Key_mux - 71)) | (1L << (Key_validif - 71)) | (1L << (Key_cmem - 71)) | (1L << (Key_smem - 71)) | (1L << (Key_mport - 71)) | (1L << (Key_infer - 71)) | (1L << (Key_read - 71)) | (1L << (Key_write - 71)) | (1L << (Key_rdwr - 71)) | (1L << (Id - 71)))) != 0) );
 				setState(456);
 				match(NEWLINE);
 				}
@@ -1875,12 +1875,12 @@ public class FirrtlLanguageParser extends Parser {
 			setState(462);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__18:
+			case T__13:
 			case T__19:
 			case T__20:
-			case T__25:
+			case T__21:
 			case T__26:
-			case T__28:
+			case T__27:
 			case T__29:
 			case T__30:
 			case T__31:
@@ -1921,6 +1921,7 @@ public class FirrtlLanguageParser extends Parser {
 			case T__66:
 			case T__67:
 			case T__68:
+			case T__69:
 			case Key_circuit:
 			case Key_module:
 			case Key_extmodule:
@@ -1936,7 +1937,6 @@ public class FirrtlLanguageParser extends Parser {
 			case Key_wire:
 			case Key_reg:
 			case Key_with:
-			case Key_reset:
 			case Key_mem:
 			case Key_depth:
 			case Key_reader:
@@ -2016,12 +2016,12 @@ public class FirrtlLanguageParser extends Parser {
 			setState(473);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__18:
+			case T__13:
 			case T__19:
 			case T__20:
-			case T__25:
+			case T__21:
 			case T__26:
-			case T__28:
+			case T__27:
 			case T__29:
 			case T__30:
 			case T__31:
@@ -2062,6 +2062,7 @@ public class FirrtlLanguageParser extends Parser {
 			case T__66:
 			case T__67:
 			case T__68:
+			case T__69:
 			case Key_circuit:
 			case Key_module:
 			case Key_extmodule:
@@ -2077,7 +2078,6 @@ public class FirrtlLanguageParser extends Parser {
 			case Key_wire:
 			case Key_reg:
 			case Key_with:
-			case Key_reset:
 			case Key_mem:
 			case Key_depth:
 			case Key_reader:
@@ -2131,7 +2131,7 @@ public class FirrtlLanguageParser extends Parser {
 					setState(469); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_reset - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)) | (1L << (NEWLINE - 64)))) != 0) );
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__26) | (1L << T__27) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (T__69 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)) | (1L << (NEWLINE - 64)))) != 0) );
 				setState(471);
 				match(DEDENT);
 				}
@@ -2451,11 +2451,11 @@ public class FirrtlLanguageParser extends Parser {
 				}
 
 				setState(511);
-				match(T__14);
+				match(T__15);
 				setState(512);
 				intLit();
 				setState(513);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			case 2:
@@ -2477,11 +2477,11 @@ public class FirrtlLanguageParser extends Parser {
 				}
 
 				setState(522);
-				match(T__14);
+				match(T__15);
 				setState(523);
 				intLit();
 				setState(524);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			case 3:
@@ -2493,7 +2493,7 @@ public class FirrtlLanguageParser extends Parser {
 			case 4:
 				{
 				setState(527);
-				match(T__25);
+				match(T__26);
 				setState(528);
 				exp(0);
 				setState(529);
@@ -2501,19 +2501,19 @@ public class FirrtlLanguageParser extends Parser {
 				setState(530);
 				exp(0);
 				setState(531);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			case 5:
 				{
 				setState(533);
-				match(T__26);
+				match(T__27);
 				setState(534);
 				exp(0);
 				setState(535);
 				exp(0);
 				setState(536);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			case 6:
@@ -2523,7 +2523,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(542);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__25) | (1L << T__26) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_reset - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__13) | (1L << T__26) | (1L << T__27) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40) | (1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47) | (1L << T__48) | (1L << T__49) | (1L << T__50) | (1L << T__51) | (1L << T__52) | (1L << T__53) | (1L << T__54) | (1L << T__55) | (1L << T__56) | (1L << T__57) | (1L << T__58) | (1L << T__59) | (1L << T__60) | (1L << T__61) | (1L << T__62))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (T__63 - 64)) | (1L << (T__64 - 64)) | (1L << (T__65 - 64)) | (1L << (T__66 - 64)) | (1L << (T__67 - 64)) | (1L << (T__68 - 64)) | (1L << (T__69 - 64)) | (1L << (Key_circuit - 64)) | (1L << (Key_module - 64)) | (1L << (Key_extmodule - 64)) | (1L << (Key_parameter - 64)) | (1L << (Key_input - 64)) | (1L << (Key_output - 64)) | (1L << (Key_UInt - 64)) | (1L << (Key_SInt - 64)) | (1L << (Key_Clock - 64)) | (1L << (Key_Analog - 64)) | (1L << (Key_Fixed - 64)) | (1L << (Key_flip - 64)) | (1L << (Key_wire - 64)) | (1L << (Key_reg - 64)) | (1L << (Key_with - 64)) | (1L << (Key_mem - 64)) | (1L << (Key_depth - 64)) | (1L << (Key_reader - 64)) | (1L << (Key_writer - 64)) | (1L << (Key_readwriter - 64)) | (1L << (Key_inst - 64)) | (1L << (Key_of - 64)) | (1L << (Key_node - 64)) | (1L << (Key_is - 64)) | (1L << (Key_invalid - 64)) | (1L << (Key_when - 64)) | (1L << (Key_else - 64)) | (1L << (Key_stop - 64)) | (1L << (Key_printf - 64)) | (1L << (Key_skip - 64)) | (1L << (Key_old - 64)) | (1L << (Key_new - 64)) | (1L << (Key_undefined - 64)) | (1L << (Key_mux - 64)) | (1L << (Key_validif - 64)) | (1L << (Key_cmem - 64)) | (1L << (Key_smem - 64)) | (1L << (Key_mport - 64)) | (1L << (Key_infer - 64)) | (1L << (Key_read - 64)) | (1L << (Key_write - 64)) | (1L << (Key_rdwr - 64)) | (1L << (Id - 64)))) != 0)) {
 					{
 					{
 					setState(539);
@@ -2537,7 +2537,7 @@ public class FirrtlLanguageParser extends Parser {
 				setState(548);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (HexLit - 113)))) != 0)) {
+				while (((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (HexLit - 113)) | (1L << (OctalLit - 113)) | (1L << (BinaryLit - 113)))) != 0)) {
 					{
 					{
 					setState(545);
@@ -2549,7 +2549,7 @@ public class FirrtlLanguageParser extends Parser {
 					_la = _input.LA(1);
 				}
 				setState(551);
-				match(T__15);
+				match(T__16);
 				}
 				break;
 			}
@@ -2662,6 +2662,7 @@ public class FirrtlLanguageParser extends Parser {
 				match(Id);
 				}
 				break;
+			case T__13:
 			case Key_circuit:
 			case Key_module:
 			case Key_extmodule:
@@ -2677,7 +2678,6 @@ public class FirrtlLanguageParser extends Parser {
 			case Key_wire:
 			case Key_reg:
 			case Key_with:
-			case Key_reset:
 			case Key_mem:
 			case Key_depth:
 			case Key_reader:
@@ -2767,6 +2767,7 @@ public class FirrtlLanguageParser extends Parser {
 				match(UnsignedInt);
 				}
 				break;
+			case T__13:
 			case Key_circuit:
 			case Key_module:
 			case Key_extmodule:
@@ -2782,7 +2783,6 @@ public class FirrtlLanguageParser extends Parser {
 			case Key_wire:
 			case Key_reg:
 			case Key_with:
-			case Key_reset:
 			case Key_mem:
 			case Key_depth:
 			case Key_reader:
@@ -2835,6 +2835,8 @@ public class FirrtlLanguageParser extends Parser {
 		public TerminalNode UnsignedInt() { return getToken(FirrtlLanguageParser.UnsignedInt, 0); }
 		public TerminalNode SignedInt() { return getToken(FirrtlLanguageParser.SignedInt, 0); }
 		public TerminalNode HexLit() { return getToken(FirrtlLanguageParser.HexLit, 0); }
+		public TerminalNode OctalLit() { return getToken(FirrtlLanguageParser.OctalLit, 0); }
+		public TerminalNode BinaryLit() { return getToken(FirrtlLanguageParser.BinaryLit, 0); }
 		public IntLitContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2850,7 +2852,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(586);
 			_la = _input.LA(1);
-			if ( !(((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (HexLit - 113)))) != 0)) ) {
+			if ( !(((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (HexLit - 113)) | (1L << (OctalLit - 113)) | (1L << (BinaryLit - 113)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2887,7 +2889,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(588);
 			_la = _input.LA(1);
-			if ( !(_la==T__9 || _la==T__14) ) {
+			if ( !(_la==T__9 || _la==T__15) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2924,7 +2926,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(590);
 			_la = _input.LA(1);
-			if ( !(_la==T__10 || _la==T__15) ) {
+			if ( !(_la==T__10 || _la==T__16) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2964,7 +2966,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(592);
 			_la = _input.LA(1);
-			if ( !(_la==T__27 || ((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (DoubleLit - 113)))) != 0)) ) {
+			if ( !(_la==T__28 || ((((_la - 113)) & ~0x3f) == 0 && ((1L << (_la - 113)) & ((1L << (UnsignedInt - 113)) | (1L << (SignedInt - 113)) | (1L << (DoubleLit - 113)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3001,7 +3003,6 @@ public class FirrtlLanguageParser extends Parser {
 		public TerminalNode Key_wire() { return getToken(FirrtlLanguageParser.Key_wire, 0); }
 		public TerminalNode Key_reg() { return getToken(FirrtlLanguageParser.Key_reg, 0); }
 		public TerminalNode Key_with() { return getToken(FirrtlLanguageParser.Key_with, 0); }
-		public TerminalNode Key_reset() { return getToken(FirrtlLanguageParser.Key_reset, 0); }
 		public TerminalNode Key_mem() { return getToken(FirrtlLanguageParser.Key_mem, 0); }
 		public TerminalNode Key_depth() { return getToken(FirrtlLanguageParser.Key_depth, 0); }
 		public TerminalNode Key_reader() { return getToken(FirrtlLanguageParser.Key_reader, 0); }
@@ -3044,7 +3045,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(594);
 			_la = _input.LA(1);
-			if ( !(((((_la - 70)) & ~0x3f) == 0 && ((1L << (_la - 70)) & ((1L << (Key_circuit - 70)) | (1L << (Key_module - 70)) | (1L << (Key_extmodule - 70)) | (1L << (Key_parameter - 70)) | (1L << (Key_input - 70)) | (1L << (Key_output - 70)) | (1L << (Key_UInt - 70)) | (1L << (Key_SInt - 70)) | (1L << (Key_Clock - 70)) | (1L << (Key_Analog - 70)) | (1L << (Key_Fixed - 70)) | (1L << (Key_flip - 70)) | (1L << (Key_wire - 70)) | (1L << (Key_reg - 70)) | (1L << (Key_with - 70)) | (1L << (Key_reset - 70)) | (1L << (Key_mem - 70)) | (1L << (Key_depth - 70)) | (1L << (Key_reader - 70)) | (1L << (Key_writer - 70)) | (1L << (Key_readwriter - 70)) | (1L << (Key_inst - 70)) | (1L << (Key_of - 70)) | (1L << (Key_node - 70)) | (1L << (Key_is - 70)) | (1L << (Key_invalid - 70)) | (1L << (Key_when - 70)) | (1L << (Key_else - 70)) | (1L << (Key_stop - 70)) | (1L << (Key_printf - 70)) | (1L << (Key_skip - 70)) | (1L << (Key_old - 70)) | (1L << (Key_new - 70)) | (1L << (Key_undefined - 70)) | (1L << (Key_mux - 70)) | (1L << (Key_validif - 70)) | (1L << (Key_cmem - 70)) | (1L << (Key_smem - 70)) | (1L << (Key_mport - 70)) | (1L << (Key_infer - 70)) | (1L << (Key_read - 70)) | (1L << (Key_write - 70)) | (1L << (Key_rdwr - 70)))) != 0)) ) {
+			if ( !(_la==T__13 || ((((_la - 71)) & ~0x3f) == 0 && ((1L << (_la - 71)) & ((1L << (Key_circuit - 71)) | (1L << (Key_module - 71)) | (1L << (Key_extmodule - 71)) | (1L << (Key_parameter - 71)) | (1L << (Key_input - 71)) | (1L << (Key_output - 71)) | (1L << (Key_UInt - 71)) | (1L << (Key_SInt - 71)) | (1L << (Key_Clock - 71)) | (1L << (Key_Analog - 71)) | (1L << (Key_Fixed - 71)) | (1L << (Key_flip - 71)) | (1L << (Key_wire - 71)) | (1L << (Key_reg - 71)) | (1L << (Key_with - 71)) | (1L << (Key_mem - 71)) | (1L << (Key_depth - 71)) | (1L << (Key_reader - 71)) | (1L << (Key_writer - 71)) | (1L << (Key_readwriter - 71)) | (1L << (Key_inst - 71)) | (1L << (Key_of - 71)) | (1L << (Key_node - 71)) | (1L << (Key_is - 71)) | (1L << (Key_invalid - 71)) | (1L << (Key_when - 71)) | (1L << (Key_else - 71)) | (1L << (Key_stop - 71)) | (1L << (Key_printf - 71)) | (1L << (Key_skip - 71)) | (1L << (Key_old - 71)) | (1L << (Key_new - 71)) | (1L << (Key_undefined - 71)) | (1L << (Key_mux - 71)) | (1L << (Key_validif - 71)) | (1L << (Key_cmem - 71)) | (1L << (Key_smem - 71)) | (1L << (Key_mport - 71)) | (1L << (Key_infer - 71)) | (1L << (Key_read - 71)) | (1L << (Key_write - 71)) | (1L << (Key_rdwr - 71)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3081,7 +3082,7 @@ public class FirrtlLanguageParser extends Parser {
 			{
 			setState(596);
 			_la = _input.LA(1);
-			if ( !(((((_la - 29)) & ~0x3f) == 0 && ((1L << (_la - 29)) & ((1L << (T__28 - 29)) | (1L << (T__29 - 29)) | (1L << (T__30 - 29)) | (1L << (T__31 - 29)) | (1L << (T__32 - 29)) | (1L << (T__33 - 29)) | (1L << (T__34 - 29)) | (1L << (T__35 - 29)) | (1L << (T__36 - 29)) | (1L << (T__37 - 29)) | (1L << (T__38 - 29)) | (1L << (T__39 - 29)) | (1L << (T__40 - 29)) | (1L << (T__41 - 29)) | (1L << (T__42 - 29)) | (1L << (T__43 - 29)) | (1L << (T__44 - 29)) | (1L << (T__45 - 29)) | (1L << (T__46 - 29)) | (1L << (T__47 - 29)) | (1L << (T__48 - 29)) | (1L << (T__49 - 29)) | (1L << (T__50 - 29)) | (1L << (T__51 - 29)) | (1L << (T__52 - 29)) | (1L << (T__53 - 29)) | (1L << (T__54 - 29)) | (1L << (T__55 - 29)) | (1L << (T__56 - 29)) | (1L << (T__57 - 29)) | (1L << (T__58 - 29)) | (1L << (T__59 - 29)) | (1L << (T__60 - 29)) | (1L << (T__61 - 29)) | (1L << (T__62 - 29)) | (1L << (T__63 - 29)) | (1L << (T__64 - 29)) | (1L << (T__65 - 29)) | (1L << (T__66 - 29)) | (1L << (T__67 - 29)) | (1L << (T__68 - 29)))) != 0)) ) {
+			if ( !(((((_la - 30)) & ~0x3f) == 0 && ((1L << (_la - 30)) & ((1L << (T__29 - 30)) | (1L << (T__30 - 30)) | (1L << (T__31 - 30)) | (1L << (T__32 - 30)) | (1L << (T__33 - 30)) | (1L << (T__34 - 30)) | (1L << (T__35 - 30)) | (1L << (T__36 - 30)) | (1L << (T__37 - 30)) | (1L << (T__38 - 30)) | (1L << (T__39 - 30)) | (1L << (T__40 - 30)) | (1L << (T__41 - 30)) | (1L << (T__42 - 30)) | (1L << (T__43 - 30)) | (1L << (T__44 - 30)) | (1L << (T__45 - 30)) | (1L << (T__46 - 30)) | (1L << (T__47 - 30)) | (1L << (T__48 - 30)) | (1L << (T__49 - 30)) | (1L << (T__50 - 30)) | (1L << (T__51 - 30)) | (1L << (T__52 - 30)) | (1L << (T__53 - 30)) | (1L << (T__54 - 30)) | (1L << (T__55 - 30)) | (1L << (T__56 - 30)) | (1L << (T__57 - 30)) | (1L << (T__58 - 30)) | (1L << (T__59 - 30)) | (1L << (T__60 - 30)) | (1L << (T__61 - 30)) | (1L << (T__62 - 30)) | (1L << (T__63 - 30)) | (1L << (T__64 - 30)) | (1L << (T__65 - 30)) | (1L << (T__66 - 30)) | (1L << (T__67 - 30)) | (1L << (T__68 - 30)) | (1L << (T__69 - 30)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -3133,7 +3134,7 @@ public class FirrtlLanguageParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0081\u0259\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0083\u0259\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3181,41 +3182,41 @@ public class FirrtlLanguageParser extends Parser {
 		"\f\26\16\26\u0241\13\26\3\27\3\27\5\27\u0245\n\27\3\30\3\30\3\30\3\30"+
 		"\5\30\u024b\n\30\3\31\3\31\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\3\36"+
 		"\3\36\3\36\2\4\n*\37\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60"+
-		"\62\64\668:\2\13\3\2LM\3\2or\3\2gi\3\2su\4\2\f\f\21\21\4\2\r\r\22\22\5"+
-		"\2\36\36stvv\3\2Hr\3\2\37G\2\u02a5\2<\3\2\2\2\4t\3\2\2\2\6v\3\2\2\2\b"+
-		"\177\3\2\2\2\n\u00bd\3\2\2\2\f\u00ca\3\2\2\2\16\u00d0\3\2\2\2\20\u00ed"+
+		"\62\64\668:\2\13\3\2MN\3\2or\3\2gi\3\2sw\4\2\f\f\22\22\4\2\r\r\23\23\5"+
+		"\2\37\37stxx\4\2\20\20Ir\3\2 H\2\u02a5\2<\3\2\2\2\4t\3\2\2\2\6v\3\2\2"+
+		"\2\b\177\3\2\2\2\n\u00bd\3\2\2\2\f\u00ca\3\2\2\2\16\u00d0\3\2\2\2\20\u00ed"+
 		"\3\2\2\2\22\u00f2\3\2\2\2\24\u00f5\3\2\2\2\26\u0101\3\2\2\2\30\u010e\3"+
 		"\2\2\2\32\u0196\3\2\2\2\34\u01cc\3\2\2\2\36\u01d0\3\2\2\2 \u01db\3\2\2"+
 		"\2\"\u01dd\3\2\2\2$\u01f3\3\2\2\2&\u01f5\3\2\2\2(\u01f7\3\2\2\2*\u022b"+
 		"\3\2\2\2,\u0244\3\2\2\2.\u024a\3\2\2\2\60\u024c\3\2\2\2\62\u024e\3\2\2"+
 		"\2\64\u0250\3\2\2\2\66\u0252\3\2\2\28\u0254\3\2\2\2:\u0256\3\2\2\2<=\7"+
-		"H\2\2=>\5,\27\2>@\7\3\2\2?A\5$\23\2@?\3\2\2\2@A\3\2\2\2AB\3\2\2\2BF\7"+
-		"\u0080\2\2CE\5\4\3\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GI\3\2\2\2"+
-		"HF\3\2\2\2IJ\7\u0081\2\2JK\7\2\2\3K\3\3\2\2\2LM\7I\2\2MN\5,\27\2NP\7\3"+
-		"\2\2OQ\5$\23\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RV\7\u0080\2\2SU\5\6\4\2T"+
+		"I\2\2=>\5,\27\2>@\7\3\2\2?A\5$\23\2@?\3\2\2\2@A\3\2\2\2AB\3\2\2\2BF\7"+
+		"\u0082\2\2CE\5\4\3\2DC\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GI\3\2\2\2"+
+		"HF\3\2\2\2IJ\7\u0083\2\2JK\7\2\2\3K\3\3\2\2\2LM\7J\2\2MN\5,\27\2NP\7\3"+
+		"\2\2OQ\5$\23\2PO\3\2\2\2PQ\3\2\2\2QR\3\2\2\2RV\7\u0082\2\2SU\5\6\4\2T"+
 		"S\3\2\2\2UX\3\2\2\2VT\3\2\2\2VW\3\2\2\2WY\3\2\2\2XV\3\2\2\2YZ\5\22\n\2"+
-		"Z[\7\u0081\2\2[u\3\2\2\2\\]\7J\2\2]^\5,\27\2^`\7\3\2\2_a\5$\23\2`_\3\2"+
-		"\2\2`a\3\2\2\2ab\3\2\2\2bf\7\u0080\2\2ce\5\6\4\2dc\3\2\2\2eh\3\2\2\2f"+
+		"Z[\7\u0083\2\2[u\3\2\2\2\\]\7K\2\2]^\5,\27\2^`\7\3\2\2_a\5$\23\2`_\3\2"+
+		"\2\2`a\3\2\2\2ab\3\2\2\2bf\7\u0082\2\2ce\5\6\4\2dc\3\2\2\2eh\3\2\2\2f"+
 		"d\3\2\2\2fg\3\2\2\2gj\3\2\2\2hf\3\2\2\2ik\5\16\b\2ji\3\2\2\2jk\3\2\2\2"+
 		"ko\3\2\2\2ln\5\20\t\2ml\3\2\2\2nq\3\2\2\2om\3\2\2\2op\3\2\2\2pr\3\2\2"+
-		"\2qo\3\2\2\2rs\7\u0081\2\2su\3\2\2\2tL\3\2\2\2t\\\3\2\2\2u\5\3\2\2\2v"+
+		"\2qo\3\2\2\2rs\7\u0083\2\2su\3\2\2\2tL\3\2\2\2t\\\3\2\2\2u\5\3\2\2\2v"+
 		"w\5\b\5\2wx\5,\27\2xy\7\3\2\2y{\5\n\6\2z|\5$\23\2{z\3\2\2\2{|\3\2\2\2"+
-		"|}\3\2\2\2}~\7~\2\2~\7\3\2\2\2\177\u0080\t\2\2\2\u0080\t\3\2\2\2\u0081"+
-		"\u0082\b\6\1\2\u0082\u0087\7N\2\2\u0083\u0084\7\4\2\2\u0084\u0085\5\60"+
-		"\31\2\u0085\u0086\7\5\2\2\u0086\u0088\3\2\2\2\u0087\u0083\3\2\2\2\u0087"+
-		"\u0088\3\2\2\2\u0088\u00be\3\2\2\2\u0089\u008e\7O\2\2\u008a\u008b\7\4"+
-		"\2\2\u008b\u008c\5\60\31\2\u008c\u008d\7\5\2\2\u008d\u008f\3\2\2\2\u008e"+
-		"\u008a\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u00be\3\2\2\2\u0090\u0095\7R"+
-		"\2\2\u0091\u0092\7\4\2\2\u0092\u0093\5\60\31\2\u0093\u0094\7\5\2\2\u0094"+
-		"\u0096\3\2\2\2\u0095\u0091\3\2\2\2\u0095\u0096\3\2\2\2\u0096\u009d\3\2"+
-		"\2\2\u0097\u0098\7\4\2\2\u0098\u0099\7\4\2\2\u0099\u009a\5\60\31\2\u009a"+
-		"\u009b\7\5\2\2\u009b\u009c\7\5\2\2\u009c\u009e\3\2\2\2\u009d\u0097\3\2"+
-		"\2\2\u009d\u009e\3\2\2\2\u009e\u00be\3\2\2\2\u009f\u00a5\7\6\2\2\u00a0"+
+		"|}\3\2\2\2}~\7\u0080\2\2~\7\3\2\2\2\177\u0080\t\2\2\2\u0080\t\3\2\2\2"+
+		"\u0081\u0082\b\6\1\2\u0082\u0087\7O\2\2\u0083\u0084\7\4\2\2\u0084\u0085"+
+		"\5\60\31\2\u0085\u0086\7\5\2\2\u0086\u0088\3\2\2\2\u0087\u0083\3\2\2\2"+
+		"\u0087\u0088\3\2\2\2\u0088\u00be\3\2\2\2\u0089\u008e\7P\2\2\u008a\u008b"+
+		"\7\4\2\2\u008b\u008c\5\60\31\2\u008c\u008d\7\5\2\2\u008d\u008f\3\2\2\2"+
+		"\u008e\u008a\3\2\2\2\u008e\u008f\3\2\2\2\u008f\u00be\3\2\2\2\u0090\u0095"+
+		"\7S\2\2\u0091\u0092\7\4\2\2\u0092\u0093\5\60\31\2\u0093\u0094\7\5\2\2"+
+		"\u0094\u0096\3\2\2\2\u0095\u0091\3\2\2\2\u0095\u0096\3\2\2\2\u0096\u009d"+
+		"\3\2\2\2\u0097\u0098\7\4\2\2\u0098\u0099\7\4\2\2\u0099\u009a\5\60\31\2"+
+		"\u009a\u009b\7\5\2\2\u009b\u009c\7\5\2\2\u009c\u009e\3\2\2\2\u009d\u0097"+
+		"\3\2\2\2\u009d\u009e\3\2\2\2\u009e\u00be\3\2\2\2\u009f\u00a5\7\6\2\2\u00a0"+
 		"\u00a1\5\62\32\2\u00a1\u00a2\5\66\34\2\u00a2\u00a3\5\66\34\2\u00a3\u00a4"+
 		"\5\64\33\2\u00a4\u00a6\3\2\2\2\u00a5\u00a0\3\2\2\2\u00a5\u00a6\3\2\2\2"+
 		"\u00a6\u00a9\3\2\2\2\u00a7\u00a8\7\7\2\2\u00a8\u00aa\5\60\31\2\u00a9\u00a7"+
-		"\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00be\3\2\2\2\u00ab\u00be\7P\2\2\u00ac"+
-		"\u00be\7\b\2\2\u00ad\u00be\7\t\2\2\u00ae\u00b3\7Q\2\2\u00af\u00b0\7\4"+
+		"\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00be\3\2\2\2\u00ab\u00be\7Q\2\2\u00ac"+
+		"\u00be\7\b\2\2\u00ad\u00be\7\t\2\2\u00ae\u00b3\7R\2\2\u00af\u00b0\7\4"+
 		"\2\2\u00b0\u00b1\5\60\31\2\u00b1\u00b2\7\5\2\2\u00b2\u00b4\3\2\2\2\u00b3"+
 		"\u00af\3\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00be\3\2\2\2\u00b5\u00b9\7\n"+
 		"\2\2\u00b6\u00b8\5\f\7\2\u00b7\u00b6\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9"+
@@ -3226,147 +3227,147 @@ public class FirrtlLanguageParser extends Parser {
 		"\u00c6\3\2\2\2\u00bf\u00c0\f\3\2\2\u00c0\u00c1\7\f\2\2\u00c1\u00c2\5\60"+
 		"\31\2\u00c2\u00c3\7\r\2\2\u00c3\u00c5\3\2\2\2\u00c4\u00bf\3\2\2\2\u00c5"+
 		"\u00c8\3\2\2\2\u00c6\u00c4\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\13\3\2\2"+
-		"\2\u00c8\u00c6\3\2\2\2\u00c9\u00cb\7S\2\2\u00ca\u00c9\3\2\2\2\u00ca\u00cb"+
+		"\2\u00c8\u00c6\3\2\2\2\u00c9\u00cb\7T\2\2\u00ca\u00c9\3\2\2\2\u00ca\u00cb"+
 		"\3\2\2\2\u00cb\u00cc\3\2\2\2\u00cc\u00cd\5.\30\2\u00cd\u00ce\7\3\2\2\u00ce"+
 		"\u00cf\5\n\6\2\u00cf\r\3\2\2\2\u00d0\u00d1\7\16\2\2\u00d1\u00d2\7\17\2"+
-		"\2\u00d2\u00d3\5,\27\2\u00d3\u00d4\7~\2\2\u00d4\17\3\2\2\2\u00d5\u00d6"+
-		"\7K\2\2\u00d6\u00d7\5,\27\2\u00d7\u00d8\7\17\2\2\u00d8\u00d9\5\60\31\2"+
-		"\u00d9\u00da\7~\2\2\u00da\u00ee\3\2\2\2\u00db\u00dc\7K\2\2\u00dc\u00dd"+
-		"\5,\27\2\u00dd\u00de\7\17\2\2\u00de\u00df\7w\2\2\u00df\u00e0\7~\2\2\u00e0"+
-		"\u00ee\3\2\2\2\u00e1\u00e2\7K\2\2\u00e2\u00e3\5,\27\2\u00e3\u00e4\7\17"+
-		"\2\2\u00e4\u00e5\7v\2\2\u00e5\u00e6\7~\2\2\u00e6\u00ee\3\2\2\2\u00e7\u00e8"+
-		"\7K\2\2\u00e8\u00e9\5,\27\2\u00e9\u00ea\7\17\2\2\u00ea\u00eb\7x\2\2\u00eb"+
-		"\u00ec\7~\2\2\u00ec\u00ee\3\2\2\2\u00ed\u00d5\3\2\2\2\u00ed\u00db\3\2"+
-		"\2\2\u00ed\u00e1\3\2\2\2\u00ed\u00e7\3\2\2\2\u00ee\21\3\2\2\2\u00ef\u00f1"+
-		"\5\36\20\2\u00f0\u00ef\3\2\2\2\u00f1\u00f4\3\2\2\2\u00f2\u00f0\3\2\2\2"+
-		"\u00f2\u00f3\3\2\2\2\u00f3\23\3\2\2\2\u00f4\u00f2\3\2\2\2\u00f5\u00f6"+
-		"\7W\2\2\u00f6\u00f7\7\20\2\2\u00f7\u00f8\7\21\2\2\u00f8\u00f9\5*\26\2"+
-		"\u00f9\u00fa\5*\26\2\u00fa\u00fb\7\22\2\2\u00fb\25\3\2\2\2\u00fc\u0102"+
-		"\5\24\13\2\u00fd\u00fe\7\21\2\2\u00fe\u00ff\5\24\13\2\u00ff\u0100\7\22"+
-		"\2\2\u0100\u0102\3\2\2\2\u0101\u00fc\3\2\2\2\u0101\u00fd\3\2\2\2\u0102"+
-		"\27\3\2\2\2\u0103\u0104\7\u0080\2\2\u0104\u0106\5\26\f\2\u0105\u0107\5"+
-		"$\23\2\u0106\u0105\3\2\2\2\u0106\u0107\3\2\2\2\u0107\u0108\3\2\2\2\u0108"+
-		"\u0109\7\u0081\2\2\u0109\u010f\3\2\2\2\u010a\u010b\7\21\2\2\u010b\u010c"+
-		"\5\26\f\2\u010c\u010d\7\22\2\2\u010d\u010f\3\2\2\2\u010e\u0103\3\2\2\2"+
-		"\u010e\u010a\3\2\2\2\u010f\31\3\2\2\2\u0110\u0111\7T\2\2\u0111\u0112\5"+
-		",\27\2\u0112\u0113\7\3\2\2\u0113\u0115\5\n\6\2\u0114\u0116\5$\23\2\u0115"+
-		"\u0114\3\2\2\2\u0115\u0116\3\2\2\2\u0116\u0197\3\2\2\2\u0117\u0118\7U"+
-		"\2\2\u0118\u0119\5,\27\2\u0119\u011a\7\3\2\2\u011a\u011b\5\n\6\2\u011b"+
-		"\u011f\5*\26\2\u011c\u011d\7V\2\2\u011d\u011e\7\3\2\2\u011e\u0120\5\30"+
-		"\r\2\u011f\u011c\3\2\2\2\u011f\u0120\3\2\2\2\u0120\u0122\3\2\2\2\u0121"+
-		"\u0123\5$\23\2\u0122\u0121\3\2\2\2\u0122\u0123\3\2\2\2\u0123\u0197\3\2"+
-		"\2\2\u0124\u0125\7X\2\2\u0125\u0126\5,\27\2\u0126\u0128\7\3\2\2\u0127"+
-		"\u0129\5$\23\2\u0128\u0127\3\2\2\2\u0128\u0129\3\2\2\2\u0129\u012a\3\2"+
-		"\2\2\u012a\u012e\7\u0080\2\2\u012b\u012d\5\34\17\2\u012c\u012b\3\2\2\2"+
-		"\u012d\u0130\3\2\2\2\u012e\u012c\3\2\2\2\u012e\u012f\3\2\2\2\u012f\u0131"+
-		"\3\2\2\2\u0130\u012e\3\2\2\2\u0131\u0132\7\u0081\2\2\u0132\u0197\3\2\2"+
-		"\2\u0133\u0134\7l\2\2\u0134\u0135\5,\27\2\u0135\u0136\7\3\2\2\u0136\u0138"+
-		"\5\n\6\2\u0137\u0139\5$\23\2\u0138\u0137\3\2\2\2\u0138\u0139\3\2\2\2\u0139"+
-		"\u0197\3\2\2\2\u013a\u013b\7m\2\2\u013b\u013c\5,\27\2\u013c\u013d\7\3"+
-		"\2\2\u013d\u013f\5\n\6\2\u013e\u0140\5(\25\2\u013f\u013e\3\2\2\2\u013f"+
-		"\u0140\3\2\2\2\u0140\u0142\3\2\2\2\u0141\u0143\5$\23\2\u0142\u0141\3\2"+
-		"\2\2\u0142\u0143\3\2\2\2\u0143\u0197\3\2\2\2\u0144\u0145\5&\24\2\u0145"+
-		"\u0146\7n\2\2\u0146\u0147\5,\27\2\u0147\u0148\7\17\2\2\u0148\u0149\5,"+
-		"\27\2\u0149\u014a\7\f\2\2\u014a\u014b\5*\26\2\u014b\u014c\7\r\2\2\u014c"+
-		"\u014e\5*\26\2\u014d\u014f\5$\23\2\u014e\u014d\3\2\2\2\u014e\u014f\3\2"+
-		"\2\2\u014f\u0197\3\2\2\2\u0150\u0151\7]\2\2\u0151\u0152\5,\27\2\u0152"+
-		"\u0153\7^\2\2\u0153\u0155\5,\27\2\u0154\u0156\5$\23\2\u0155\u0154\3\2"+
-		"\2\2\u0155\u0156\3\2\2\2\u0156\u0197\3\2\2\2\u0157\u0158\7_\2\2\u0158"+
+		"\2\u00d2\u00d3\5,\27\2\u00d3\u00d4\7\u0080\2\2\u00d4\17\3\2\2\2\u00d5"+
+		"\u00d6\7L\2\2\u00d6\u00d7\5,\27\2\u00d7\u00d8\7\17\2\2\u00d8\u00d9\5\60"+
+		"\31\2\u00d9\u00da\7\u0080\2\2\u00da\u00ee\3\2\2\2\u00db\u00dc\7L\2\2\u00dc"+
+		"\u00dd\5,\27\2\u00dd\u00de\7\17\2\2\u00de\u00df\7y\2\2\u00df\u00e0\7\u0080"+
+		"\2\2\u00e0\u00ee\3\2\2\2\u00e1\u00e2\7L\2\2\u00e2\u00e3\5,\27\2\u00e3"+
+		"\u00e4\7\17\2\2\u00e4\u00e5\7x\2\2\u00e5\u00e6\7\u0080\2\2\u00e6\u00ee"+
+		"\3\2\2\2\u00e7\u00e8\7L\2\2\u00e8\u00e9\5,\27\2\u00e9\u00ea\7\17\2\2\u00ea"+
+		"\u00eb\7z\2\2\u00eb\u00ec\7\u0080\2\2\u00ec\u00ee\3\2\2\2\u00ed\u00d5"+
+		"\3\2\2\2\u00ed\u00db\3\2\2\2\u00ed\u00e1\3\2\2\2\u00ed\u00e7\3\2\2\2\u00ee"+
+		"\21\3\2\2\2\u00ef\u00f1\5\36\20\2\u00f0\u00ef\3\2\2\2\u00f1\u00f4\3\2"+
+		"\2\2\u00f2\u00f0\3\2\2\2\u00f2\u00f3\3\2\2\2\u00f3\23\3\2\2\2\u00f4\u00f2"+
+		"\3\2\2\2\u00f5\u00f6\7\20\2\2\u00f6\u00f7\7\21\2\2\u00f7\u00f8\7\22\2"+
+		"\2\u00f8\u00f9\5*\26\2\u00f9\u00fa\5*\26\2\u00fa\u00fb\7\23\2\2\u00fb"+
+		"\25\3\2\2\2\u00fc\u0102\5\24\13\2\u00fd\u00fe\7\22\2\2\u00fe\u00ff\5\24"+
+		"\13\2\u00ff\u0100\7\23\2\2\u0100\u0102\3\2\2\2\u0101\u00fc\3\2\2\2\u0101"+
+		"\u00fd\3\2\2\2\u0102\27\3\2\2\2\u0103\u0104\7\u0082\2\2\u0104\u0106\5"+
+		"\26\f\2\u0105\u0107\5$\23\2\u0106\u0105\3\2\2\2\u0106\u0107\3\2\2\2\u0107"+
+		"\u0108\3\2\2\2\u0108\u0109\7\u0083\2\2\u0109\u010f\3\2\2\2\u010a\u010b"+
+		"\7\22\2\2\u010b\u010c\5\26\f\2\u010c\u010d\7\23\2\2\u010d\u010f\3\2\2"+
+		"\2\u010e\u0103\3\2\2\2\u010e\u010a\3\2\2\2\u010f\31\3\2\2\2\u0110\u0111"+
+		"\7U\2\2\u0111\u0112\5,\27\2\u0112\u0113\7\3\2\2\u0113\u0115\5\n\6\2\u0114"+
+		"\u0116\5$\23\2\u0115\u0114\3\2\2\2\u0115\u0116\3\2\2\2\u0116\u0197\3\2"+
+		"\2\2\u0117\u0118\7V\2\2\u0118\u0119\5,\27\2\u0119\u011a\7\3\2\2\u011a"+
+		"\u011b\5\n\6\2\u011b\u011f\5*\26\2\u011c\u011d\7W\2\2\u011d\u011e\7\3"+
+		"\2\2\u011e\u0120\5\30\r\2\u011f\u011c\3\2\2\2\u011f\u0120\3\2\2\2\u0120"+
+		"\u0122\3\2\2\2\u0121\u0123\5$\23\2\u0122\u0121\3\2\2\2\u0122\u0123\3\2"+
+		"\2\2\u0123\u0197\3\2\2\2\u0124\u0125\7X\2\2\u0125\u0126\5,\27\2\u0126"+
+		"\u0128\7\3\2\2\u0127\u0129\5$\23\2\u0128\u0127\3\2\2\2\u0128\u0129\3\2"+
+		"\2\2\u0129\u012a\3\2\2\2\u012a\u012e\7\u0082\2\2\u012b\u012d\5\34\17\2"+
+		"\u012c\u012b\3\2\2\2\u012d\u0130\3\2\2\2\u012e\u012c\3\2\2\2\u012e\u012f"+
+		"\3\2\2\2\u012f\u0131\3\2\2\2\u0130\u012e\3\2\2\2\u0131\u0132\7\u0083\2"+
+		"\2\u0132\u0197\3\2\2\2\u0133\u0134\7l\2\2\u0134\u0135\5,\27\2\u0135\u0136"+
+		"\7\3\2\2\u0136\u0138\5\n\6\2\u0137\u0139\5$\23\2\u0138\u0137\3\2\2\2\u0138"+
+		"\u0139\3\2\2\2\u0139\u0197\3\2\2\2\u013a\u013b\7m\2\2\u013b\u013c\5,\27"+
+		"\2\u013c\u013d\7\3\2\2\u013d\u013f\5\n\6\2\u013e\u0140\5(\25\2\u013f\u013e"+
+		"\3\2\2\2\u013f\u0140\3\2\2\2\u0140\u0142\3\2\2\2\u0141\u0143\5$\23\2\u0142"+
+		"\u0141\3\2\2\2\u0142\u0143\3\2\2\2\u0143\u0197\3\2\2\2\u0144\u0145\5&"+
+		"\24\2\u0145\u0146\7n\2\2\u0146\u0147\5,\27\2\u0147\u0148\7\17\2\2\u0148"+
+		"\u0149\5,\27\2\u0149\u014a\7\f\2\2\u014a\u014b\5*\26\2\u014b\u014c\7\r"+
+		"\2\2\u014c\u014e\5*\26\2\u014d\u014f\5$\23\2\u014e\u014d\3\2\2\2\u014e"+
+		"\u014f\3\2\2\2\u014f\u0197\3\2\2\2\u0150\u0151\7]\2\2\u0151\u0152\5,\27"+
+		"\2\u0152\u0153\7^\2\2\u0153\u0155\5,\27\2\u0154\u0156\5$\23\2\u0155\u0154"+
+		"\3\2\2\2\u0155\u0156\3\2\2\2\u0156\u0197\3\2\2\2\u0157\u0158\7_\2\2\u0158"+
 		"\u0159\5,\27\2\u0159\u015a\7\17\2\2\u015a\u015c\5*\26\2\u015b\u015d\5"+
 		"$\23\2\u015c\u015b\3\2\2\2\u015c\u015d\3\2\2\2\u015d\u0197\3\2\2\2\u015e"+
-		"\u015f\5*\26\2\u015f\u0160\7\23\2\2\u0160\u0162\5*\26\2\u0161\u0163\5"+
+		"\u015f\5*\26\2\u015f\u0160\7\24\2\2\u0160\u0162\5*\26\2\u0161\u0163\5"+
 		"$\23\2\u0162\u0161\3\2\2\2\u0162\u0163\3\2\2\2\u0163\u0197\3\2\2\2\u0164"+
-		"\u0165\5*\26\2\u0165\u0166\7\24\2\2\u0166\u0168\5*\26\2\u0167\u0169\5"+
+		"\u0165\5*\26\2\u0165\u0166\7\25\2\2\u0166\u0168\5*\26\2\u0167\u0169\5"+
 		"$\23\2\u0168\u0167\3\2\2\2\u0168\u0169\3\2\2\2\u0169\u0197\3\2\2\2\u016a"+
 		"\u016b\5*\26\2\u016b\u016c\7`\2\2\u016c\u016e\7a\2\2\u016d\u016f\5$\23"+
 		"\2\u016e\u016d\3\2\2\2\u016e\u016f\3\2\2\2\u016f\u0197\3\2\2\2\u0170\u0197"+
-		"\5\"\22\2\u0171\u0172\7\25\2\2\u0172\u0173\5*\26\2\u0173\u0174\5*\26\2"+
-		"\u0174\u0175\5\60\31\2\u0175\u0177\7\22\2\2\u0176\u0178\5$\23\2\u0177"+
-		"\u0176\3\2\2\2\u0177\u0178\3\2\2\2\u0178\u0197\3\2\2\2\u0179\u017a\7\26"+
-		"\2\2\u017a\u017b\5*\26\2\u017b\u017c\5*\26\2\u017c\u0180\7w\2\2\u017d"+
+		"\5\"\22\2\u0171\u0172\7\26\2\2\u0172\u0173\5*\26\2\u0173\u0174\5*\26\2"+
+		"\u0174\u0175\5\60\31\2\u0175\u0177\7\23\2\2\u0176\u0178\5$\23\2\u0177"+
+		"\u0176\3\2\2\2\u0177\u0178\3\2\2\2\u0178\u0197\3\2\2\2\u0179\u017a\7\27"+
+		"\2\2\u017a\u017b\5*\26\2\u017b\u017c\5*\26\2\u017c\u0180\7y\2\2\u017d"+
 		"\u017f\5*\26\2\u017e\u017d\3\2\2\2\u017f\u0182\3\2\2\2\u0180\u017e\3\2"+
 		"\2\2\u0180\u0181\3\2\2\2\u0181\u0183\3\2\2\2\u0182\u0180\3\2\2\2\u0183"+
-		"\u0185\7\22\2\2\u0184\u0186\5$\23\2\u0185\u0184\3\2\2\2\u0185\u0186\3"+
+		"\u0185\7\23\2\2\u0184\u0186\5$\23\2\u0185\u0184\3\2\2\2\u0185\u0186\3"+
 		"\2\2\2\u0186\u0197\3\2\2\2\u0187\u0189\7f\2\2\u0188\u018a\5$\23\2\u0189"+
-		"\u0188\3\2\2\2\u0189\u018a\3\2\2\2\u018a\u0197\3\2\2\2\u018b\u018c\7\27"+
-		"\2\2\u018c\u018e\7\21\2\2\u018d\u018f\5*\26\2\u018e\u018d\3\2\2\2\u018f"+
+		"\u0188\3\2\2\2\u0189\u018a\3\2\2\2\u018a\u0197\3\2\2\2\u018b\u018c\7\30"+
+		"\2\2\u018c\u018e\7\22\2\2\u018d\u018f\5*\26\2\u018e\u018d\3\2\2\2\u018f"+
 		"\u0190\3\2\2\2\u0190\u018e\3\2\2\2\u0190\u0191\3\2\2\2\u0191\u0192\3\2"+
-		"\2\2\u0192\u0194\7\22\2\2\u0193\u0195\5$\23\2\u0194\u0193\3\2\2\2\u0194"+
+		"\2\2\u0192\u0194\7\23\2\2\u0193\u0195\5$\23\2\u0194\u0193\3\2\2\2\u0194"+
 		"\u0195\3\2\2\2\u0195\u0197\3\2\2\2\u0196\u0110\3\2\2\2\u0196\u0117\3\2"+
 		"\2\2\u0196\u0124\3\2\2\2\u0196\u0133\3\2\2\2\u0196\u013a\3\2\2\2\u0196"+
 		"\u0144\3\2\2\2\u0196\u0150\3\2\2\2\u0196\u0157\3\2\2\2\u0196\u015e\3\2"+
 		"\2\2\u0196\u0164\3\2\2\2\u0196\u016a\3\2\2\2\u0196\u0170\3\2\2\2\u0196"+
 		"\u0171\3\2\2\2\u0196\u0179\3\2\2\2\u0196\u0187\3\2\2\2\u0196\u018b\3\2"+
-		"\2\2\u0197\33\3\2\2\2\u0198\u0199\7\30\2\2\u0199\u019a\7\20\2\2\u019a"+
-		"\u019b\5\n\6\2\u019b\u019c\7~\2\2\u019c\u01cd\3\2\2\2\u019d\u019e\7Y\2"+
-		"\2\u019e\u019f\7\20\2\2\u019f\u01a0\5\60\31\2\u01a0\u01a1\7~\2\2\u01a1"+
-		"\u01cd\3\2\2\2\u01a2\u01a3\7\31\2\2\u01a3\u01a4\7\20\2\2\u01a4\u01a5\5"+
-		"\60\31\2\u01a5\u01a6\7~\2\2\u01a6\u01cd\3\2\2\2\u01a7\u01a8\7\32\2\2\u01a8"+
-		"\u01a9\7\20\2\2\u01a9\u01aa\5\60\31\2\u01aa\u01ab\7~\2\2\u01ab\u01cd\3"+
-		"\2\2\2\u01ac\u01ad\7\33\2\2\u01ad\u01ae\7\20\2\2\u01ae\u01af\5(\25\2\u01af"+
-		"\u01b0\7~\2\2\u01b0\u01cd\3\2\2\2\u01b1\u01b2\7Z\2\2\u01b2\u01b4\7\20"+
-		"\2\2\u01b3\u01b5\5,\27\2\u01b4\u01b3\3\2\2\2\u01b5\u01b6\3\2\2\2\u01b6"+
-		"\u01b4\3\2\2\2\u01b6\u01b7\3\2\2\2\u01b7\u01b8\3\2\2\2\u01b8\u01b9\7~"+
-		"\2\2\u01b9\u01cd\3\2\2\2\u01ba\u01bb\7[\2\2\u01bb\u01bd\7\20\2\2\u01bc"+
-		"\u01be\5,\27\2\u01bd\u01bc\3\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01bd\3\2"+
-		"\2\2\u01bf\u01c0\3\2\2\2\u01c0\u01c1\3\2\2\2\u01c1\u01c2\7~\2\2\u01c2"+
-		"\u01cd\3\2\2\2\u01c3\u01c4\7\\\2\2\u01c4\u01c6\7\20\2\2\u01c5\u01c7\5"+
-		",\27\2\u01c6\u01c5\3\2\2\2\u01c7\u01c8\3\2\2\2\u01c8\u01c6\3\2\2\2\u01c8"+
-		"\u01c9\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca\u01cb\7~\2\2\u01cb\u01cd\3\2"+
-		"\2\2\u01cc\u0198\3\2\2\2\u01cc\u019d\3\2\2\2\u01cc\u01a2\3\2\2\2\u01cc"+
-		"\u01a7\3\2\2\2\u01cc\u01ac\3\2\2\2\u01cc\u01b1\3\2\2\2\u01cc\u01ba\3\2"+
-		"\2\2\u01cc\u01c3\3\2\2\2\u01cd\35\3\2\2\2\u01ce\u01d1\5\32\16\2\u01cf"+
-		"\u01d1\7~\2\2\u01d0\u01ce\3\2\2\2\u01d0\u01cf\3\2\2\2\u01d1\37\3\2\2\2"+
-		"\u01d2\u01dc\5\36\20\2\u01d3\u01d5\7\u0080\2\2\u01d4\u01d6\5\36\20\2\u01d5"+
-		"\u01d4\3\2\2\2\u01d6\u01d7\3\2\2\2\u01d7\u01d5\3\2\2\2\u01d7\u01d8\3\2"+
-		"\2\2\u01d8\u01d9\3\2\2\2\u01d9\u01da\7\u0081\2\2\u01da\u01dc\3\2\2\2\u01db"+
-		"\u01d2\3\2\2\2\u01db\u01d3\3\2\2\2\u01dc!\3\2\2\2\u01dd\u01de\7b\2\2\u01de"+
-		"\u01df\5*\26\2\u01df\u01e1\7\3\2\2\u01e0\u01e2\5$\23\2\u01e1\u01e0\3\2"+
-		"\2\2\u01e1\u01e2\3\2\2\2\u01e2\u01e4\3\2\2\2\u01e3\u01e5\5 \21\2\u01e4"+
-		"\u01e3\3\2\2\2\u01e4\u01e5\3\2\2\2\u01e5\u01f1\3\2\2\2\u01e6\u01ef\7c"+
-		"\2\2\u01e7\u01f0\5\"\22\2\u01e8\u01ea\7\3\2\2\u01e9\u01eb\5$\23\2\u01ea"+
-		"\u01e9\3\2\2\2\u01ea\u01eb\3\2\2\2\u01eb\u01ed\3\2\2\2\u01ec\u01ee\5 "+
-		"\21\2\u01ed\u01ec\3\2\2\2\u01ed\u01ee\3\2\2\2\u01ee\u01f0\3\2\2\2\u01ef"+
-		"\u01e7\3\2\2\2\u01ef\u01e8\3\2\2\2\u01f0\u01f2\3\2\2\2\u01f1\u01e6\3\2"+
-		"\2\2\u01f1\u01f2\3\2\2\2\u01f2#\3\2\2\2\u01f3\u01f4\7y\2\2\u01f4%\3\2"+
-		"\2\2\u01f5\u01f6\t\3\2\2\u01f6\'\3\2\2\2\u01f7\u01f8\t\4\2\2\u01f8)\3"+
-		"\2\2\2\u01f9\u01fa\b\26\1\2\u01fa\u01ff\7N\2\2\u01fb\u01fc\7\4\2\2\u01fc"+
-		"\u01fd\5\60\31\2\u01fd\u01fe\7\5\2\2\u01fe\u0200\3\2\2\2\u01ff\u01fb\3"+
-		"\2\2\2\u01ff\u0200\3\2\2\2\u0200\u0201\3\2\2\2\u0201\u0202\7\21\2\2\u0202"+
-		"\u0203\5\60\31\2\u0203\u0204\7\22\2\2\u0204\u022c\3\2\2\2\u0205\u020a"+
-		"\7O\2\2\u0206\u0207\7\4\2\2\u0207\u0208\5\60\31\2\u0208\u0209\7\5\2\2"+
-		"\u0209\u020b\3\2\2\2\u020a\u0206\3\2\2\2\u020a\u020b\3\2\2\2\u020b\u020c"+
-		"\3\2\2\2\u020c\u020d\7\21\2\2\u020d\u020e\5\60\31\2\u020e\u020f\7\22\2"+
-		"\2\u020f\u022c\3\2\2\2\u0210\u022c\5,\27\2\u0211\u0212\7\34\2\2\u0212"+
-		"\u0213\5*\26\2\u0213\u0214\5*\26\2\u0214\u0215\5*\26\2\u0215\u0216\7\22"+
-		"\2\2\u0216\u022c\3\2\2\2\u0217\u0218\7\35\2\2\u0218\u0219\5*\26\2\u0219"+
-		"\u021a\5*\26\2\u021a\u021b\7\22\2\2\u021b\u022c\3\2\2\2\u021c\u0220\5"+
-		":\36\2\u021d\u021f\5*\26\2\u021e\u021d\3\2\2\2\u021f\u0222\3\2\2\2\u0220"+
-		"\u021e\3\2\2\2\u0220\u0221\3\2\2\2\u0221\u0226\3\2\2\2\u0222\u0220\3\2"+
-		"\2\2\u0223\u0225\5\60\31\2\u0224\u0223\3\2\2\2\u0225\u0228\3\2\2\2\u0226"+
-		"\u0224\3\2\2\2\u0226\u0227\3\2\2\2\u0227\u0229\3\2\2\2\u0228\u0226\3\2"+
-		"\2\2\u0229\u022a\7\22\2\2\u022a\u022c\3\2\2\2\u022b\u01f9\3\2\2\2\u022b"+
-		"\u0205\3\2\2\2\u022b\u0210\3\2\2\2\u022b\u0211\3\2\2\2\u022b\u0217\3\2"+
-		"\2\2\u022b\u021c\3\2\2\2\u022c\u023f\3\2\2\2\u022d\u022e\f\t\2\2\u022e"+
-		"\u022f\7\7\2\2\u022f\u023e\5.\30\2\u0230\u0231\f\b\2\2\u0231\u0232\7\7"+
-		"\2\2\u0232\u023e\7v\2\2\u0233\u0234\f\7\2\2\u0234\u0235\7\f\2\2\u0235"+
-		"\u0236\5\60\31\2\u0236\u0237\7\r\2\2\u0237\u023e\3\2\2\2\u0238\u0239\f"+
-		"\6\2\2\u0239\u023a\7\f\2\2\u023a\u023b\5*\26\2\u023b\u023c\7\r\2\2\u023c"+
-		"\u023e\3\2\2\2\u023d\u022d\3\2\2\2\u023d\u0230\3\2\2\2\u023d\u0233\3\2"+
-		"\2\2\u023d\u0238\3\2\2\2\u023e\u0241\3\2\2\2\u023f\u023d\3\2\2\2\u023f"+
-		"\u0240\3\2\2\2\u0240+\3\2\2\2\u0241\u023f\3\2\2\2\u0242\u0245\7z\2\2\u0243"+
-		"\u0245\58\35\2\u0244\u0242\3\2\2\2\u0244\u0243\3\2\2\2\u0245-\3\2\2\2"+
-		"\u0246\u024b\7z\2\2\u0247\u024b\7{\2\2\u0248\u024b\7s\2\2\u0249\u024b"+
-		"\58\35\2\u024a\u0246\3\2\2\2\u024a\u0247\3\2\2\2\u024a\u0248\3\2\2\2\u024a"+
-		"\u0249\3\2\2\2\u024b/\3\2\2\2\u024c\u024d\t\5\2\2\u024d\61\3\2\2\2\u024e"+
-		"\u024f\t\6\2\2\u024f\63\3\2\2\2\u0250\u0251\t\7\2\2\u0251\65\3\2\2\2\u0252"+
-		"\u0253\t\b\2\2\u0253\67\3\2\2\2\u0254\u0255\t\t\2\2\u02559\3\2\2\2\u0256"+
-		"\u0257\t\n\2\2\u0257;\3\2\2\2G@FPV`fjot{\u0087\u008e\u0095\u009d\u00a5"+
-		"\u00a9\u00b3\u00b9\u00bd\u00c6\u00ca\u00ed\u00f2\u0101\u0106\u010e\u0115"+
-		"\u011f\u0122\u0128\u012e\u0138\u013f\u0142\u014e\u0155\u015c\u0162\u0168"+
-		"\u016e\u0177\u0180\u0185\u0189\u0190\u0194\u0196\u01b6\u01bf\u01c8\u01cc"+
-		"\u01d0\u01d7\u01db\u01e1\u01e4\u01ea\u01ed\u01ef\u01f1\u01ff\u020a\u0220"+
-		"\u0226\u022b\u023d\u023f\u0244\u024a";
+		"\2\2\u0197\33\3\2\2\2\u0198\u0199\7\31\2\2\u0199\u019a\7\21\2\2\u019a"+
+		"\u019b\5\n\6\2\u019b\u019c\7\u0080\2\2\u019c\u01cd\3\2\2\2\u019d\u019e"+
+		"\7Y\2\2\u019e\u019f\7\21\2\2\u019f\u01a0\5\60\31\2\u01a0\u01a1\7\u0080"+
+		"\2\2\u01a1\u01cd\3\2\2\2\u01a2\u01a3\7\32\2\2\u01a3\u01a4\7\21\2\2\u01a4"+
+		"\u01a5\5\60\31\2\u01a5\u01a6\7\u0080\2\2\u01a6\u01cd\3\2\2\2\u01a7\u01a8"+
+		"\7\33\2\2\u01a8\u01a9\7\21\2\2\u01a9\u01aa\5\60\31\2\u01aa\u01ab\7\u0080"+
+		"\2\2\u01ab\u01cd\3\2\2\2\u01ac\u01ad\7\34\2\2\u01ad\u01ae\7\21\2\2\u01ae"+
+		"\u01af\5(\25\2\u01af\u01b0\7\u0080\2\2\u01b0\u01cd\3\2\2\2\u01b1\u01b2"+
+		"\7Z\2\2\u01b2\u01b4\7\21\2\2\u01b3\u01b5\5,\27\2\u01b4\u01b3\3\2\2\2\u01b5"+
+		"\u01b6\3\2\2\2\u01b6\u01b4\3\2\2\2\u01b6\u01b7\3\2\2\2\u01b7\u01b8\3\2"+
+		"\2\2\u01b8\u01b9\7\u0080\2\2\u01b9\u01cd\3\2\2\2\u01ba\u01bb\7[\2\2\u01bb"+
+		"\u01bd\7\21\2\2\u01bc\u01be\5,\27\2\u01bd\u01bc\3\2\2\2\u01be\u01bf\3"+
+		"\2\2\2\u01bf\u01bd\3\2\2\2\u01bf\u01c0\3\2\2\2\u01c0\u01c1\3\2\2\2\u01c1"+
+		"\u01c2\7\u0080\2\2\u01c2\u01cd\3\2\2\2\u01c3\u01c4\7\\\2\2\u01c4\u01c6"+
+		"\7\21\2\2\u01c5\u01c7\5,\27\2\u01c6\u01c5\3\2\2\2\u01c7\u01c8\3\2\2\2"+
+		"\u01c8\u01c6\3\2\2\2\u01c8\u01c9\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca\u01cb"+
+		"\7\u0080\2\2\u01cb\u01cd\3\2\2\2\u01cc\u0198\3\2\2\2\u01cc\u019d\3\2\2"+
+		"\2\u01cc\u01a2\3\2\2\2\u01cc\u01a7\3\2\2\2\u01cc\u01ac\3\2\2\2\u01cc\u01b1"+
+		"\3\2\2\2\u01cc\u01ba\3\2\2\2\u01cc\u01c3\3\2\2\2\u01cd\35\3\2\2\2\u01ce"+
+		"\u01d1\5\32\16\2\u01cf\u01d1\7\u0080\2\2\u01d0\u01ce\3\2\2\2\u01d0\u01cf"+
+		"\3\2\2\2\u01d1\37\3\2\2\2\u01d2\u01dc\5\36\20\2\u01d3\u01d5\7\u0082\2"+
+		"\2\u01d4\u01d6\5\36\20\2\u01d5\u01d4\3\2\2\2\u01d6\u01d7\3\2\2\2\u01d7"+
+		"\u01d5\3\2\2\2\u01d7\u01d8\3\2\2\2\u01d8\u01d9\3\2\2\2\u01d9\u01da\7\u0083"+
+		"\2\2\u01da\u01dc\3\2\2\2\u01db\u01d2\3\2\2\2\u01db\u01d3\3\2\2\2\u01dc"+
+		"!\3\2\2\2\u01dd\u01de\7b\2\2\u01de\u01df\5*\26\2\u01df\u01e1\7\3\2\2\u01e0"+
+		"\u01e2\5$\23\2\u01e1\u01e0\3\2\2\2\u01e1\u01e2\3\2\2\2\u01e2\u01e4\3\2"+
+		"\2\2\u01e3\u01e5\5 \21\2\u01e4\u01e3\3\2\2\2\u01e4\u01e5\3\2\2\2\u01e5"+
+		"\u01f1\3\2\2\2\u01e6\u01ef\7c\2\2\u01e7\u01f0\5\"\22\2\u01e8\u01ea\7\3"+
+		"\2\2\u01e9\u01eb\5$\23\2\u01ea\u01e9\3\2\2\2\u01ea\u01eb\3\2\2\2\u01eb"+
+		"\u01ed\3\2\2\2\u01ec\u01ee\5 \21\2\u01ed\u01ec\3\2\2\2\u01ed\u01ee\3\2"+
+		"\2\2\u01ee\u01f0\3\2\2\2\u01ef\u01e7\3\2\2\2\u01ef\u01e8\3\2\2\2\u01f0"+
+		"\u01f2\3\2\2\2\u01f1\u01e6\3\2\2\2\u01f1\u01f2\3\2\2\2\u01f2#\3\2\2\2"+
+		"\u01f3\u01f4\7{\2\2\u01f4%\3\2\2\2\u01f5\u01f6\t\3\2\2\u01f6\'\3\2\2\2"+
+		"\u01f7\u01f8\t\4\2\2\u01f8)\3\2\2\2\u01f9\u01fa\b\26\1\2\u01fa\u01ff\7"+
+		"O\2\2\u01fb\u01fc\7\4\2\2\u01fc\u01fd\5\60\31\2\u01fd\u01fe\7\5\2\2\u01fe"+
+		"\u0200\3\2\2\2\u01ff\u01fb\3\2\2\2\u01ff\u0200\3\2\2\2\u0200\u0201\3\2"+
+		"\2\2\u0201\u0202\7\22\2\2\u0202\u0203\5\60\31\2\u0203\u0204\7\23\2\2\u0204"+
+		"\u022c\3\2\2\2\u0205\u020a\7P\2\2\u0206\u0207\7\4\2\2\u0207\u0208\5\60"+
+		"\31\2\u0208\u0209\7\5\2\2\u0209\u020b\3\2\2\2\u020a\u0206\3\2\2\2\u020a"+
+		"\u020b\3\2\2\2\u020b\u020c\3\2\2\2\u020c\u020d\7\22\2\2\u020d\u020e\5"+
+		"\60\31\2\u020e\u020f\7\23\2\2\u020f\u022c\3\2\2\2\u0210\u022c\5,\27\2"+
+		"\u0211\u0212\7\35\2\2\u0212\u0213\5*\26\2\u0213\u0214\5*\26\2\u0214\u0215"+
+		"\5*\26\2\u0215\u0216\7\23\2\2\u0216\u022c\3\2\2\2\u0217\u0218\7\36\2\2"+
+		"\u0218\u0219\5*\26\2\u0219\u021a\5*\26\2\u021a\u021b\7\23\2\2\u021b\u022c"+
+		"\3\2\2\2\u021c\u0220\5:\36\2\u021d\u021f\5*\26\2\u021e\u021d\3\2\2\2\u021f"+
+		"\u0222\3\2\2\2\u0220\u021e\3\2\2\2\u0220\u0221\3\2\2\2\u0221\u0226\3\2"+
+		"\2\2\u0222\u0220\3\2\2\2\u0223\u0225\5\60\31\2\u0224\u0223\3\2\2\2\u0225"+
+		"\u0228\3\2\2\2\u0226\u0224\3\2\2\2\u0226\u0227\3\2\2\2\u0227\u0229\3\2"+
+		"\2\2\u0228\u0226\3\2\2\2\u0229\u022a\7\23\2\2\u022a\u022c\3\2\2\2\u022b"+
+		"\u01f9\3\2\2\2\u022b\u0205\3\2\2\2\u022b\u0210\3\2\2\2\u022b\u0211\3\2"+
+		"\2\2\u022b\u0217\3\2\2\2\u022b\u021c\3\2\2\2\u022c\u023f\3\2\2\2\u022d"+
+		"\u022e\f\t\2\2\u022e\u022f\7\7\2\2\u022f\u023e\5.\30\2\u0230\u0231\f\b"+
+		"\2\2\u0231\u0232\7\7\2\2\u0232\u023e\7x\2\2\u0233\u0234\f\7\2\2\u0234"+
+		"\u0235\7\f\2\2\u0235\u0236\5\60\31\2\u0236\u0237\7\r\2\2\u0237\u023e\3"+
+		"\2\2\2\u0238\u0239\f\6\2\2\u0239\u023a\7\f\2\2\u023a\u023b\5*\26\2\u023b"+
+		"\u023c\7\r\2\2\u023c\u023e\3\2\2\2\u023d\u022d\3\2\2\2\u023d\u0230\3\2"+
+		"\2\2\u023d\u0233\3\2\2\2\u023d\u0238\3\2\2\2\u023e\u0241\3\2\2\2\u023f"+
+		"\u023d\3\2\2\2\u023f\u0240\3\2\2\2\u0240+\3\2\2\2\u0241\u023f\3\2\2\2"+
+		"\u0242\u0245\7|\2\2\u0243\u0245\58\35\2\u0244\u0242\3\2\2\2\u0244\u0243"+
+		"\3\2\2\2\u0245-\3\2\2\2\u0246\u024b\7|\2\2\u0247\u024b\7}\2\2\u0248\u024b"+
+		"\7s\2\2\u0249\u024b\58\35\2\u024a\u0246\3\2\2\2\u024a\u0247\3\2\2\2\u024a"+
+		"\u0248\3\2\2\2\u024a\u0249\3\2\2\2\u024b/\3\2\2\2\u024c\u024d\t\5\2\2"+
+		"\u024d\61\3\2\2\2\u024e\u024f\t\6\2\2\u024f\63\3\2\2\2\u0250\u0251\t\7"+
+		"\2\2\u0251\65\3\2\2\2\u0252\u0253\t\b\2\2\u0253\67\3\2\2\2\u0254\u0255"+
+		"\t\t\2\2\u02559\3\2\2\2\u0256\u0257\t\n\2\2\u0257;\3\2\2\2G@FPV`fjot{"+
+		"\u0087\u008e\u0095\u009d\u00a5\u00a9\u00b3\u00b9\u00bd\u00c6\u00ca\u00ed"+
+		"\u00f2\u0101\u0106\u010e\u0115\u011f\u0122\u0128\u012e\u0138\u013f\u0142"+
+		"\u014e\u0155\u015c\u0162\u0168\u016e\u0177\u0180\u0185\u0189\u0190\u0194"+
+		"\u0196\u01b6\u01bf\u01c8\u01cc\u01d0\u01d7\u01db\u01e1\u01e4\u01ea\u01ed"+
+		"\u01ef\u01f1\u01ff\u020a\u0220\u0226\u022b\u023d\u023f\u0244\u024a";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
