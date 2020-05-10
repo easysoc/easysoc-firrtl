@@ -4,7 +4,7 @@
 
 - Syntax highlighting
 - Structure View
-- Navigate to corresponding Chisel code by Ctrl+Click the Firrtl fileinfo comment
+- Navigate to corresponding Chisel code by Ctrl+Click or Ctrl+B on the Firrtl fileinfo comment
 
 ### Build
 
@@ -18,3 +18,5 @@
 
 3. run gradle tasks buildPlugin or runIde directly
 
+
+![](https://plugins.jetbrains.com/files/14183/screenshot_21600.png)
