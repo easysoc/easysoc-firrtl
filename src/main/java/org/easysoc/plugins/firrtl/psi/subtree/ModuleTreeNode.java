@@ -24,8 +24,7 @@ public class ModuleTreeNode extends ANTLRPsiNode {
             @Nullable
             @Override
             public String getPresentableText() {
-
-                return "module:" + id.getText();
+                return getFirstChild().getText() + ":" + id.getText();
             }
 
             @Nullable
