@@ -1,7 +1,7 @@
 package org.easysoc.plugins.firrtl;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import org.easysoc.plugins.firrtl.icons.Icons;
+import icons.Icons;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,4 +1,4 @@
-package org.easysoc.plugins.firrtl.icons;
+package icons;
 
 import com.intellij.openapi.util.IconLoader;
 

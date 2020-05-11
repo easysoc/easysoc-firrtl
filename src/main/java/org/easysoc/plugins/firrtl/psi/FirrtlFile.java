@@ -5,7 +5,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import org.easysoc.plugins.firrtl.FirrtlFileType;
 import org.easysoc.plugins.firrtl.FirrtlLanguage;
-import org.easysoc.plugins.firrtl.icons.Icons;
+import icons.Icons;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
