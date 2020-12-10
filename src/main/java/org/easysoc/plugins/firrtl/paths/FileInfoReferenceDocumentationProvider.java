@@ -8,7 +8,7 @@ public class FileInfoReferenceDocumentationProvider extends AbstractDocumentatio
     @Override
     public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
         if (element instanceof FileInfoRef.MyFakePsiElement ) {
-            return "Jump to Chisel code";
+            return "Jump to the Chisel code";
         }
         return null;
     }

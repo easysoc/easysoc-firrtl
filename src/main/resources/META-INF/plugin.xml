@@ -4,8 +4,8 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>support octal and binary literal formats</li>
-            <li>remove keyword 'reset'</li>
+            <li>Support assume, assert, cover statements</li>
+            <li>Support for IntelliJ IDEA 2020.3</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
