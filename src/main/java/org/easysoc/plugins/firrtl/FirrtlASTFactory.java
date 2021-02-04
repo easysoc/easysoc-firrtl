@@ -6,6 +6,7 @@ import com.intellij.psi.impl.source.tree.*;
 import com.intellij.psi.tree.IElementType;
 import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.easysoc.plugins.firrtl.parser.FirrtlLanguageLexer;
+import org.easysoc.plugins.firrtl.parser.FirrtlLanguageParser;
 import org.easysoc.plugins.firrtl.psi.leaf.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +31,8 @@ public class FirrtlASTFactory extends DefaultASTFactoryImpl {
     switch (tokenType) {
       case FirrtlLanguageLexer.Id:
         return new IdentifierLeafNode(type, text);
+      case FirrtlLanguageParser.DEDENT:
+        return new DedentLeafNode(type, text);
       case FirrtlLanguageLexer.FileInfo:
         return new FileInfoLeafNode(type, text);
       default:

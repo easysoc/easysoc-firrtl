@@ -2,7 +2,6 @@ package org.easysoc.plugins.firrtl.psi.subtree;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode;
 import org.easysoc.plugins.firrtl.psi.leaf.IdentifierLeafNode;

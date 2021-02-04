@@ -3,6 +3,7 @@
 ### Features
 
 - Syntax highlighting
+- Code folding
 - Structure View
 - Navigate to corresponding Chisel code by Ctrl+Click or Ctrl+B on the Firrtl fileinfo comment
 

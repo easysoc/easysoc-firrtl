@@ -17,7 +17,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor;
 import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory;
 import org.antlr.intellij.adaptor.lexer.RuleIElementType;
-import org.antlr.intellij.adaptor.lexer.TokenIElementType;
 import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor;
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode;
 import org.easysoc.plugins.firrtl.parser.FirrtlLanguageLexer;
@@ -25,8 +24,6 @@ import org.easysoc.plugins.firrtl.parser.FirrtlLanguageParser;
 import org.easysoc.plugins.firrtl.psi.*;
 import org.easysoc.plugins.firrtl.psi.subtree.*;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class FirrtlParserDefinition implements ParserDefinition {
 	public static final IFileElementType FILE = new IFileElementType(FirrtlLanguage.INSTANCE);
@@ -148,12 +145,14 @@ public class FirrtlParserDefinition implements ParserDefinition {
 				return new CircuitTreeNode(node);
 			case FirrtlLanguageParser.RULE_module :
 				return new ModuleTreeNode(node);
+			case FirrtlLanguageParser.RULE_moduleBlock :
+				return new ModuleBlockTreeNode(node);
 			case FirrtlLanguageParser.RULE_port :
 				return new PortTreeNode(node);
+			case FirrtlLanguageParser.RULE_suite :
+				return new SuiteTreeNode(node);
 			case FirrtlLanguageParser.RULE_id :
 				return new IdentifierTreeNode(node);
-//			case FirrtlLanguageParser.RULE_module :
-//				return new FunctionSubtree(node, elType);
 			default :
 				return new ANTLRPsiNode(node);
 		}

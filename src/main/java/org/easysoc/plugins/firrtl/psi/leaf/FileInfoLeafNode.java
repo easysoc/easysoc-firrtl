@@ -2,12 +2,12 @@ package org.easysoc.plugins.firrtl.psi.leaf;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
-import org.antlr.intellij.adaptor.psi.ANTLRPsiLeafNode;
 import org.easysoc.plugins.firrtl.resolve.reference.FileInfoRef;
 
 
-public class FileInfoLeafNode extends ANTLRPsiLeafNode {
+public class FileInfoLeafNode extends LeafPsiElement {
 	public FileInfoLeafNode(IElementType type, CharSequence text) {
 		super(type, text);
 	}

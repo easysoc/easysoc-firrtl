@@ -4,8 +4,8 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Support assume, assert, cover statements</li>
-            <li>Support for IntelliJ IDEA 2020.3</li>
+            <li>Support folding for module, moduleBlock, suite</li>
+            <li>Depends on Chisel plugin</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
@@ -16,6 +16,7 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.easysoc.chisel</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
@@ -34,6 +35,7 @@
         <lang.psiStructureViewFactory language="Firrtl"
                                       implementationClass="org.easysoc.plugins.firrtl.psi.FirrtlStructureViewFactory"/>
 
+        <lang.foldingBuilder language="Firrtl" implementationClass="org.easysoc.plugins.firrtl.folding.FirrtlFoldingBuilder"/>
     </extensions>
 
     <actions>
