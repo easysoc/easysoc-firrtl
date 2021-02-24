@@ -1,4 +1,4 @@
-// See LICENSE for license details.
+// SPDX-License-Identifier: Apache-2.0
 
 grammar FirrtlLanguage;
 
@@ -102,7 +102,7 @@ reset_block
 stmt
   : 'wire' id ':' type info?
   | 'reg' id ':' type exp ('with' ':' reset_block)? info?
-  | 'mem' id ':' info? INDENT memField* DEDENT
+  | mem
   | 'cmem' id ':' type info?
   | 'smem' id ':' type ruw? info?
   | mdir 'mport' id '=' id '[' exp ']' exp info?
@@ -112,24 +112,33 @@ stmt
   | exp '<-' exp info?
   | exp 'is' 'invalid' info?
   | when
-  | 'stop(' exp exp intLit ')' info?
-  | 'printf(' exp exp StringLit ( exp)* ')' info?
+  | 'stop(' exp exp intLit ')' stmtName? info?
+  | 'printf(' exp exp StringLit ( exp)* ')' stmtName? info?
   | 'skip' info?
   | 'attach' '(' exp+ ')' info?
-  | 'assert' '(' exp exp exp StringLit ')' info?
-  | 'assume' '(' exp exp exp StringLit ')' info?
-  | 'cover' '(' exp exp exp StringLit ')' info?
+  | 'assert' '(' exp exp exp StringLit ')' stmtName? info?
+  | 'assume' '(' exp exp exp StringLit ')' stmtName? info?
+  | 'cover' '(' exp exp exp StringLit ')' stmtName? info?
+  ;
+
+stmtName
+  : ':' id
+  ;
+
+mem
+  : 'mem' id ':' info? INDENT memField* DEDENT
   ;
 
 memField
-	:  'data-type' '=>' type NEWLINE
-	| 'depth' '=>' intLit NEWLINE
-	| 'read-latency' '=>' intLit NEWLINE
-	| 'write-latency' '=>' intLit NEWLINE
-	| 'read-under-write' '=>' ruw NEWLINE
-	| 'reader' '=>' id+ NEWLINE
-	| 'writer' '=>' id+ NEWLINE
-	| 'readwriter' '=>' id+ NEWLINE
+	:  'data-type' '=>' type
+	| 'depth' '=>' intLit
+	| 'read-latency' '=>' intLit
+	| 'write-latency' '=>' intLit
+	| 'read-under-write' '=>' ruw
+	| 'reader' '=>' id+
+	| 'writer' '=>' id+
+	| 'readwriter' '=>' id+
+	| NEWLINE
 	;
 
 simple_stmt
@@ -358,6 +367,9 @@ Key_infer  : 'infer' ;
 Key_read : 'read' ;
 Key_write  : 'write' ;
 Key_rdwr  : 'rdwr' ;
+Key_assert : 'assert' ;
+Key_assume  : 'assume' ;
+Key_cover  : 'cover' ;
 
 UnsignedInt
   : '0'

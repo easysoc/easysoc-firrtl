@@ -123,6 +123,9 @@ public class FirrtlSyntaxHighlighter extends SyntaxHighlighterBase {
 			case FirrtlLanguageLexer.Key_read :
 			case FirrtlLanguageLexer.Key_write :
 			case FirrtlLanguageLexer.Key_rdwr :
+			case FirrtlLanguageLexer.Key_assert :
+			case FirrtlLanguageLexer.Key_assume :
+			case FirrtlLanguageLexer.Key_cover :
 				attrKey = KEYWORD;
 				break;
 			case FirrtlLanguageLexer.StringLit :

@@ -4,8 +4,9 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Support folding for module, moduleBlock, suite</li>
-            <li>Depends on Chisel plugin</li>
+            <li>Allow Side Effecting Statement to have Names</li>
+            <li>Support folding for mem</li>
+            <li>Support syntax highlight for assert, assume, cover</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
