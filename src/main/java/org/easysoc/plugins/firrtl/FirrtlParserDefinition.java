@@ -153,6 +153,8 @@ public class FirrtlParserDefinition implements ParserDefinition {
 				return new SuiteTreeNode(node);
 			case FirrtlLanguageParser.RULE_id :
 				return new IdentifierTreeNode(node);
+			case FirrtlLanguageParser.RULE_mem :
+				return new MemTreeNode(node);
 			default :
 				return new ANTLRPsiNode(node);
 		}

@@ -10,6 +10,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.easysoc.plugins.firrtl.psi.leaf.DedentLeafNode;
+import org.easysoc.plugins.firrtl.psi.subtree.MemTreeNode;
 import org.easysoc.plugins.firrtl.psi.subtree.ModuleBlockTreeNode;
 import org.easysoc.plugins.firrtl.psi.subtree.ModuleTreeNode;
 import org.easysoc.plugins.firrtl.psi.subtree.SuiteTreeNode;
@@ -42,6 +43,7 @@ public class FirrtlFoldingBuilder extends FoldingBuilderEx implements DumbAware 
         if (blockNode != null && blockNode.getLastChild() != null) {
             descriptors.add(new FoldingDescriptor(blockNode, noDedentTextRange(blockNode)));
             addSuiteFoldingDescriptor(descriptors, blockNode);
+            addMemFoldingDescriptor(descriptors, blockNode);
         }
     }
 
@@ -49,6 +51,14 @@ public class FirrtlFoldingBuilder extends FoldingBuilderEx implements DumbAware 
         for (SuiteTreeNode suiteNode : PsiTreeUtil.findChildrenOfType(root, SuiteTreeNode.class)) {
             if (suiteNode != null && suiteNode.getLastChild() != null) {
                 descriptors.add(new FoldingDescriptor(suiteNode, noDedentTextRange(suiteNode)));
+            }
+        }
+    }
+
+    private void addMemFoldingDescriptor(List<FoldingDescriptor> descriptors, PsiElement root) {
+        for (MemTreeNode memNode : PsiTreeUtil.findChildrenOfType(root, MemTreeNode.class)) {
+            if (memNode != null && memNode.getLastChild() != null) {
+                descriptors.add(new FoldingDescriptor(memNode, noDedentTextRange(memNode)));
             }
         }
     }
@@ -74,6 +84,8 @@ public class FirrtlFoldingBuilder extends FoldingBuilderEx implements DumbAware 
             }
         } else if (node instanceof ModuleBlockTreeNode) {
             retTxt = "moduleBlock";
+        } else if (node instanceof MemTreeNode) {
+            retTxt = "mem";
         }
         return retTxt;
     }
