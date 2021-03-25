@@ -21,3 +21,14 @@
 
 
 ![](https://plugins.jetbrains.com/files/14183/screenshot_21600.png)
+
+### Sponsor
+
+Please check if these plugins are helpful to you (Free for students and teachers)
+
+- [EasySoC Diagrammer](https://plugins.jetbrains.com/plugin/16255-easysoc-diagrammer)	for circuit visualization
+- [EasySoC Verilog](https://plugins.jetbrains.com/plugin/14184-easysoc-verilog) 	Jump to the corresponding Chisel code
+
+|                     Contact me by WeChat                     |
+| :----------------------------------------------------------: |
+| ![wechatpay_160](https://github.com/itviewer/personal/blob/main/wechat.jpg?raw=true) |
