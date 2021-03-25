@@ -5,7 +5,9 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
@@ -16,6 +18,11 @@ import com.intellij.psi.search.GlobalSearchScope;
 import org.easysoc.plugins.firrtl.psi.leaf.FileInfoLeafNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
@@ -42,21 +49,32 @@ public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
 			String[] token = myElement.getName().split(" ");
 			String filename = token[0].substring(2);
 			String[] pos = token[1].split(":");
-			int line = Integer.valueOf(pos[0]) - 1;
-			int column = Integer.valueOf(pos[1].replace("]", "")) - 1;
+			int line = Integer.parseInt(pos[0]) - 1;
+			int column = Integer.parseInt(pos[1].replace("]", "")) - 1;
 
-			Project p = myElement.getProject();
-			PsiFile[] files = FilenameIndex.getFilesByName(p,filename, GlobalSearchScope.projectScope(p));
+			Project project = myElement.getProject();
+			PsiFile[] files = FilenameIndex.getFilesByName(project,filename, GlobalSearchScope.projectScope(project));
 			int length = files.length;
 			if (length != 0){
 				if (length == 1) {
-					new OpenFileDescriptor(p, files[0].getVirtualFile(),line,column).navigate(true);
+					new OpenFileDescriptor(project, files[0].getVirtualFile(),line,column).navigate(true);
 				} else {
-					Notifications.Bus.notify(new Notification("","",String.valueOf(length) + " "
-							+ filename + "files found!", NotificationType.INFORMATION));
+					List<String> list = new ArrayList<>();
+					final Map<String, VirtualFile> map = new HashMap<>();
+					for (PsiFile file : files) {
+						VirtualFile vFile = file.getVirtualFile();
+						String relativePath = vFile.getCanonicalPath().replace(project.getBasePath(), "").substring(1);
+
+						map.put(relativePath, vFile);
+						list.add(relativePath);
+					}
+					JBPopupFactory.getInstance().createPopupChooserBuilder(list)
+							.setTitle("File Chooser")
+							.setItemChosenCallback((chosenFile) -> new OpenFileDescriptor(project, map.get(chosenFile),line,column).navigate(true))
+							.createPopup().showInFocusCenter();
 				}
 			} else {
-				Notifications.Bus.notify(new Notification("","",filename + " not found!",
+				Notifications.Bus.notify(new Notification("FileInfo","",filename + " not found!",
 						NotificationType.ERROR));
 			}
 		}

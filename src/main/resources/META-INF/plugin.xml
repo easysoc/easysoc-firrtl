@@ -1,9 +1,10 @@
-<idea-plugin allow-bundled-update="true" url="https://www.easysoc.org">
+<idea-plugin url="https://www.easysoc.org">
     <id>org.easysoc.firrtl</id>
     <name>EasySoC Firrtl</name>
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
+            <li>Allow to select the Scala/Chisel file to jump to</li>
             <li>Allow Side Effecting Statement to have Names</li>
             <li>Support folding for mem</li>
             <li>Support syntax highlight for assert, assume, cover</li>
