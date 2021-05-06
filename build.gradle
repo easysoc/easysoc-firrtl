@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.6.5'
+    id 'org.jetbrains.intellij' version '0.7.3'
 //    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
 }
 
@@ -12,14 +12,14 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.antlr:antlr4-runtime:4.8'
+    implementation 'org.antlr:antlr4-runtime:4.9.2'
     implementation 'org.antlr:antlr4-intellij-adaptor:0.1'
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // version and localPath should not be specified at the same time
-    localPath "/home/itviewer/Downloads/software/chip"
+    localPath "/home/itviewer/Downloads/software/idea-IC"
 
     // https://blog.jetbrains.com/platform/2019/06/java-functionality-extracted-as-a-plugin/
     // plugins 'PsiViewer:201.6251.22-EAP-SNAPSHOT.3'

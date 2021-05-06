@@ -4,12 +4,12 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Support addw, subw, dshlw primop</li>
+            <li>Upgrade antlr4 to 4.9.2</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
     Jump to the corresponding Chisel code by navigate(Ctrl+Click or Ctrl+B) on the Firrtl fileinfo comment.<br>
-    Also supports Syntax highlighting, Structure View and more features in the future.
+    Also supports Syntax highlighting, Code folding, Structure View and more features in the future.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
