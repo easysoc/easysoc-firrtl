@@ -15,7 +15,7 @@
 
     change `ideDirectory`  to "your idea install path"
 
-    comment or remove `jvmArgs '-Didea.platform.prefix=Chip'`
+    comment out or remove `jvmArgs '-Didea.platform.prefix=Chip'`
 
 3. run gradle tasks buildPlugin or runIde directly
 
@@ -26,7 +26,6 @@
 
 Please check if these plugins are helpful to you (Free for students and teachers)
 
-- [EasySoC Diagrammer](https://plugins.jetbrains.com/plugin/16255-easysoc-diagrammer)	for circuit visualization
 - [EasySoC Verilog](https://plugins.jetbrains.com/plugin/14184-easysoc-verilog) 	Jump to the corresponding Chisel code
 
 |                     Contact me by WeChat                     |

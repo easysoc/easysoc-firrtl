@@ -28,7 +28,7 @@ intellij {
 
 runIde {
     // https://bintray.com/jetbrains/intellij-jbr/jbrsdk11-linux-x64#files
-    jbrVersion "11_0_9_1b1145.77"
+    jbrVersion "11_0_11_9b1341.60"
     ideDirectory "/home/itviewer/Downloads/software/chip"
     jvmArgs '-Didea.platform.prefix=Chip'
     //for jbr11

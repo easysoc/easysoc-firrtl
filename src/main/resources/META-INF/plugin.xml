@@ -4,7 +4,7 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Upgrade antlr4 to 4.9.2</li>
+            <li>Support compressed Fileinfo</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[

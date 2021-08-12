@@ -45,12 +45,18 @@ public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
 		@Override
 		public void navigate(boolean requestFocus) {
 
-			// compatible with @[GCD.scala 24:19 GCD.scala 28:7]
+			// only support first item @[GCD.scala 24:{19,20} GCD2.scala 28:7]
 			String[] token = myElement.getName().split(" ");
-			String filename = token[0].substring(2);
-			String[] pos = token[1].split(":");
+			String filename = token[0].substring(2);	// GCD.scala
+			String[] pos = token[1].split(":");	//
 			int line = Integer.parseInt(pos[0]) - 1;
-			int column = Integer.parseInt(pos[1].replace("]", "")) - 1;
+			int column;
+			if (pos[1].startsWith("{")) {
+				String[] columns = pos[1].split(",");
+				column = Integer.parseInt(columns[0].replace("{", "")) - 1;
+			} else {
+				column = Integer.parseInt(pos[1].replace("]", "")) - 1;
+			}
 
 			Project project = myElement.getProject();
 			PsiFile[] files = FilenameIndex.getFilesByName(project,filename, GlobalSearchScope.projectScope(project));
