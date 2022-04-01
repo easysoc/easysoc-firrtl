@@ -102,15 +102,15 @@ reset_block
 stmt
   : 'wire' id ':' type info?
   | 'reg' id ':' type exp ('with' ':' reset_block)? info?
-  | mem
+  | 'mem' id ':' info? INDENT memField* DEDENT
   | 'cmem' id ':' type info?
   | 'smem' id ':' type ruw? info?
   | mdir 'mport' id '=' id '[' exp ']' exp info?
   | 'inst' id 'of' id info?
   | 'node' id '=' exp info?
-  | exp '<=' exp info?
-  | exp '<-' exp info?
-  | exp 'is' 'invalid' info?
+  | ref '<=' exp info?
+  | ref '<-' exp info?
+  | ref 'is' 'invalid' info?
   | when
   | 'stop(' exp exp intLit ')' stmtName? info?
   | 'printf(' exp exp StringLit ( exp)* ')' stmtName? info?
@@ -125,20 +125,15 @@ stmtName
   : ':' id
   ;
 
-mem
-  : 'mem' id ':' info? INDENT memField* DEDENT
-  ;
-
 memField
-	:  'data-type' '=>' type
-	| 'depth' '=>' intLit
-	| 'read-latency' '=>' intLit
-	| 'write-latency' '=>' intLit
-	| 'read-under-write' '=>' ruw
-	| 'reader' '=>' id+
-	| 'writer' '=>' id+
-	| 'readwriter' '=>' id+
-	| NEWLINE
+	:  'data-type' '=>' type NEWLINE
+	| 'depth' '=>' intLit NEWLINE
+	| 'read-latency' '=>' intLit NEWLINE
+	| 'write-latency' '=>' intLit NEWLINE
+	| 'read-under-write' '=>' ruw NEWLINE
+	| 'reader' '=>' id+ NEWLINE
+	| 'writer' '=>' id+ NEWLINE
+	| 'readwriter' '=>' id+ NEWLINE
 	;
 
 simple_stmt
@@ -181,14 +176,20 @@ ruw
 exp
   : 'UInt' ('<' intLit '>')? '(' intLit ')'
   | 'SInt' ('<' intLit '>')? '(' intLit ')'
-  | id    // Ref
-  | exp '.' fieldId
-  | exp '.' DoubleLit // TODO Workaround for #470
-  | exp '[' intLit ']'
-  | exp '[' exp ']'
+  | ref
   | 'mux(' exp exp exp ')'
   | 'validif(' exp exp ')'
   | primop exp* intLit*  ')'
+  ;
+
+ref
+  : id subref?
+  ;
+
+subref
+  : '.' fieldId subref?
+  | '.' DoubleLit subref? // TODO Workaround for #470
+  | '[' (intLit | exp) ']' subref?
   ;
 
 id
@@ -239,8 +240,11 @@ keywordAsId
   | 'UInt'
   | 'SInt'
   | 'Clock'
+  | 'Reset'
+  | 'AsyncReset'
   | 'Analog'
   | 'Fixed'
+  | 'Interval'
   | 'flip'
   | 'wire'
   | 'reg'
@@ -273,6 +277,10 @@ keywordAsId
   | 'read'
   | 'write'
   | 'rdwr'
+  | 'attach'
+  | 'assert'
+  | 'assume'
+  | 'cover'
   ;
 
 // Parentheses are added as part of name because semantics require no space between primop and open parentheses
@@ -336,8 +344,11 @@ Key_output : 'output' ;
 Key_UInt  : 'UInt' ;
 Key_SInt  : 'SInt' ;
 Key_Clock  : 'Clock' ;
+Key_Reset  : 'Reset' ;
+Key_AsyncReset  : 'AsyncReset' ;
 Key_Analog  : 'Analog' ;
 Key_Fixed  : 'Fixed' ;
+Key_Interval  : 'Interval' ;
 Key_flip  : 'flip' ;
 Key_wire  : 'wire' ;
 Key_reg  : 'reg' ;
@@ -360,7 +371,7 @@ Key_printf  : 'printf' ;
 Key_skip  : 'skip' ;
 Key_old  : 'old' ;
 Key_new  : 'new' ;
-Key_undefined  : 'undefined' ;
+Key_undefined : 'undefined' ;
 Key_mux : 'mux' ;
 Key_validif  : 'validif' ;
 Key_cmem  : 'cmem' ;
@@ -370,7 +381,8 @@ Key_infer  : 'infer' ;
 Key_read : 'read' ;
 Key_write  : 'write' ;
 Key_rdwr  : 'rdwr' ;
-Key_assert : 'assert' ;
+Key_attach : 'attach' ;
+Key_assert  : 'assert' ;
 Key_assume  : 'assume' ;
 Key_cover  : 'cover' ;
 
@@ -462,7 +474,7 @@ LegalStartChar
   ;
 
 COMMENT
-  : ';' .*? ('\n')+ -> channel(HIDDEN)
+  : ';' ~[\r\n]* -> channel(HIDDEN)
   ;
 
 WHITESPACE

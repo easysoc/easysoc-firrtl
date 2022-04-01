@@ -38,7 +38,13 @@ public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
 
 	public class MyFakePsiElement extends FakePsiElement implements SyntheticElement {
 		@Override
+		public String getPresentableText() {
+			return "FileInfo";
+		}
+
+		@Override
 		public PsiElement getParent() {
+			// FileInfoLeafNode
 			return myElement;
 		}
 
@@ -46,7 +52,7 @@ public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
 		public void navigate(boolean requestFocus) {
 
 			// only support first item @[GCD.scala 24:{19,20} GCD2.scala 28:7]
-			String[] token = myElement.getName().split(" ");
+			String[] token = myElement.getText().split(" ");
 			String filename = token[0].substring(2);	// GCD.scala
 			String[] pos = token[1].split(":");	//
 			int line = Integer.parseInt(pos[0]) - 1;
@@ -80,8 +86,8 @@ public class FileInfoRef extends PsiReferenceBase<FileInfoLeafNode> {
 							.createPopup().showInFocusCenter();
 				}
 			} else {
-				Notifications.Bus.notify(new Notification("FileInfo","",filename + " not found!",
-						NotificationType.ERROR));
+				Notifications.Bus.notify(new Notification(
+						"Firrtl","",filename + " not found!", NotificationType.ERROR));
 			}
 		}
 	}

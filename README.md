@@ -1,4 +1,4 @@
-## Firrtl plugin for Intellij platform
+## Firrtl plugin for IntelliJ platform
 
 ### Features
 
@@ -6,28 +6,11 @@
 - Code folding
 - Structure View
 - Navigate to corresponding Chisel code by Ctrl+Click or Ctrl+B on the Firrtl fileinfo comment
+- Interactively Debug Firrtl Circuits with Treadle
+- Convert firrtl to ELK text format
 
 ### Build
 
-1. [learn](https://www.jetbrains.org/intellij/sdk/docs/basics/basics.html) how to develop an intellij plugin with Gradle
+1. [Learn](https://plugins.jetbrains.com/docs/intellij/basics.html) how to develop an IntelliJ Plugin with Gradle
 
-2. modify build.gradle configuration according to your environment
-
-    change `ideDirectory`  to "your idea install path"
-
-    comment out or remove `jvmArgs '-Didea.platform.prefix=Chip'`
-
-3. run gradle tasks buildPlugin or runIde directly
-
-
-![](https://plugins.jetbrains.com/files/14183/screenshot_21600.png)
-
-### Sponsor
-
-Please check if these plugins are helpful to you (Free for students and teachers)
-
-- [EasySoC Verilog](https://plugins.jetbrains.com/plugin/14184-easysoc-verilog) 	Jump to the corresponding Chisel code
-
-|                     Contact me by WeChat                     |
-| :----------------------------------------------------------: |
-| ![wechatpay_160](https://github.com/itviewer/personal/blob/main/wechat.jpg?raw=true) |
+2. Modify the build.gradle file according to your environment, you need to be very familiar with the relevant settings listed at https://github.com/JetBrains/gradle-intellij-plugin

@@ -4,21 +4,27 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Support compressed Fileinfo</li>
+            <li>Support IntelliJ 2021.3</li>
+            <li>Interactively Debug Firrtl Circuits with Treadle!</li>
+            <li>Convert firrtl to ELK text format</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
-    Jump to the corresponding Chisel code by navigate(Ctrl+Click or Ctrl+B) on the Firrtl fileinfo comment.<br>
-    Also supports Syntax highlighting, Code folding, Structure View and more features in the future.
+    Jump to the corresponding Chisel code by navigate(Ctrl+Click or Ctrl+B) on the Firrtl fileinfo comment.</br>
+    Also supports Syntax highlighting, Code folding, Structure View and more features in the future.</br>
+    </br>
+    Interactive Firrtl circuit Simulator based on <a href="https://github.com/chipsalliance/treadle">Treadle</a>.</br>
+    Usage: When opening a Firrtl file, the menu HDL->Treadle Simulator becomes available.
     ]]></description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>org.easysoc.chisel</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <notificationGroup id="Firrtl" displayType="BALLOON"/>
+
         <fileType name="Firrtl" implementationClass="org.easysoc.plugins.firrtl.FirrtlFileType" fieldName="INSTANCE"
                   language="Firrtl" extensions="fir"/>
         <lang.syntaxHighlighterFactory language="Firrtl"
@@ -29,15 +35,29 @@
         <lang.parserDefinition language="Firrtl"
                                implementationClass="org.easysoc.plugins.firrtl.FirrtlParserDefinition"/>
 
-        <documentationProvider implementation="org.easysoc.plugins.firrtl.paths.FileInfoReferenceDocumentationProvider"
-                               order="last"/>
+        <lang.documentationProvider language="Firrtl"
+                                    implementationClass="org.easysoc.plugins.firrtl.paths.FileInfoReferenceDocumentationProvider"/>
         <lang.psiStructureViewFactory language="Firrtl"
                                       implementationClass="org.easysoc.plugins.firrtl.psi.FirrtlStructureViewFactory"/>
 
         <lang.foldingBuilder language="Firrtl" implementationClass="org.easysoc.plugins.firrtl.folding.FirrtlFoldingBuilder"/>
-    </extensions>
 
+        <!-- treadle -->
+        <projectService serviceImplementation="org.easysoc.plugins.treadle.setting.ProjectConfig"/>
+    </extensions>
+    <extensions defaultExtensionNs="org.jetbrains.plugins.terminal">
+        <localTerminalCustomizer implementation="org.easysoc.plugins.treadle.terminal.DefaultTerminalLocationCustomizer"/>
+    </extensions>
     <actions>
         <!-- Add your actions here -->
+        <group id="Firrtl" class="org.easysoc.plugins.firrtl.actions.FirrtlActionGroup">
+            <action id="TreadleSimulatorAction" class="org.easysoc.plugins.treadle.actions.TreadleSimulatorAction"
+                    text="Treadle Simulator" description="Interactively simulate the current circuit"/>
+            <action id="ReplAction" class="org.easysoc.plugins.treadle.actions.ReplAction"
+                    text="Treadle Shell" description="Interactively simulate the current circuit"/>
+            <action id="ElkAction" class="org.easysoc.plugins.firrtl.actions.ElkAction"
+                    text="Generate ELK Graph" description="Convert firrtl to ELK text format"/>
+            <add-to-group group-id="HDL"/>
+        </group>
     </actions>
 </idea-plugin>

@@ -1,43 +1,57 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.1.4'
+    id 'org.jetbrains.intellij' version '1.5.1'
 }
 
 group 'org.easysoc'
 version pluginVersion
 
+sourceCompatibility = 11
+targetCompatibility = 11
+
 repositories {
+    // sbt publishM2 for firrtl and treadle at https://github.com/easysoc
+    mavenLocal()
     mavenCentral()
+//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
-    implementation 'org.antlr:antlr4-runtime:4.9.2'
+    implementation 'org.antlr:antlr4-runtime:4.9.3'
     implementation 'org.antlr:antlr4-intellij-adaptor:0.1'
+
+    implementation ('edu.berkeley.cs:treadle_2.13:1.6-SNAPSHOT') {
+//        exclude module: 'scala-jline'
+//        exclude module: 'protobuf-java'
+    }
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // version and localPath should not be specified at the same time
+    // version = '2021.3.3'
     localPath = "/home/itviewer/Downloads/software/idea-IC"
-
-    // https://blog.jetbrains.com/platform/2019/06/java-functionality-extracted-as-a-plugin/
-    // plugins 'PsiViewer:201.6251.22-EAP-SNAPSHOT.3'
-    downloadSources = false
+    sandboxDir = "/home/itviewer/IdeaProjects/plugins-sandbox"
+    plugins = ['org.jetbrains.plugins.terminal' /**,'PsiViewer:213-SNAPSHOT' */]
+    // downloadSources = false
 }
 
 runIde {
-    // https://bintray.com/jetbrains/intellij-jbr/jbrsdk11-linux-x64#files
-    jbrVersion = '11_0_11b1504.16'
-    ideDir = project.file('/home/itviewer/Downloads/software/chip')
-    
-    jvmArgs '-Didea.platform.prefix=Chip'
+    ideDir = project.file('/home/itviewer/Downloads/software/idea-IC')
     //for jbr11
     jvmArgs '--add-exports=java.base/jdk.internal.vm=ALL-UNNAMED','-Djdk.module.illegalAccess.silent=true'
 }
 
+// https://www.jetbrains.com/idea/download/other.html
 patchPluginXml {
-    sinceBuild = '203'
-    untilBuild = '212.*'
+    sinceBuild = '213'
+    untilBuild = '221.*'
+}
+
+prepareSandbox {
+    from('src/main/webapp') {
+        into "${intellij.pluginName.get()}/webapp/"
+    }
 }
 
 buildSearchableOptions.onlyIf { false }

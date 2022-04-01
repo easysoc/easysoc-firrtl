@@ -19,6 +19,7 @@ public class FileInfoLeafNode extends LeafPsiElement {
 
 	@Override
 	public PsiReference getReference() {
+		// 这里只影响鼠标点击时的提示范围，不影响 getText() 内容
 		TextRange textRange = new TextRange(2, getText().length() - 1);
 		return new FileInfoRef(this, textRange);
 	}

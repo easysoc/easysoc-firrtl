@@ -89,8 +89,11 @@ public class FirrtlSyntaxHighlighter extends SyntaxHighlighterBase {
 			case FirrtlLanguageLexer.Key_UInt :
 			case FirrtlLanguageLexer.Key_SInt :
 			case FirrtlLanguageLexer.Key_Clock :
+			case FirrtlLanguageLexer.Key_Reset :
+			case FirrtlLanguageLexer.Key_AsyncReset :
 			case FirrtlLanguageLexer.Key_Analog :
 			case FirrtlLanguageLexer.Key_Fixed :
+			case FirrtlLanguageLexer.Key_Interval :
 			case FirrtlLanguageLexer.Key_flip :
 			case FirrtlLanguageLexer.Key_wire :
 			case FirrtlLanguageLexer.Key_reg :
@@ -123,6 +126,7 @@ public class FirrtlSyntaxHighlighter extends SyntaxHighlighterBase {
 			case FirrtlLanguageLexer.Key_read :
 			case FirrtlLanguageLexer.Key_write :
 			case FirrtlLanguageLexer.Key_rdwr :
+			case FirrtlLanguageLexer.Key_attach :
 			case FirrtlLanguageLexer.Key_assert :
 			case FirrtlLanguageLexer.Key_assume :
 			case FirrtlLanguageLexer.Key_cover :
